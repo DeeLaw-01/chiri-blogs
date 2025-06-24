@@ -1,0 +1,71 @@
+export const getNamespace = (key: string): string[] => {
+  const base = namespaces['*']
+
+  return [...base, ...(namespaces[key as keyof typeof namespaces] || [])]
+}
+
+export const namespaces = {
+  '*': ['common', 'footer', 'notifications'],
+  '/': ['home-page', 'data', 'flight-info', 'hotel-info'],
+  '/404': ['404-page'],
+  '/about': ['about-page'],
+  '/blog': ['data', 'blog-page'],
+  '/blog/[slug]': ['data', 'blog-page'],
+  '/checkout': [
+    'checkout-page',
+    'data',
+    'insurance-info',
+    'payment',
+    'hotel-info',
+    'new-hotel-page',
+    'flight-info',
+  ],
+  '/manage-booking': [
+    'manage-booking-page',
+    'data',
+    'trip-page',
+    'insurance-info',
+    'payment',
+    'hotel-manage-booking',
+    'hotel-info',
+    'flight-info',
+    'new-manage-booking-page',
+  ],
+  '/manage-booking/marketplace': [
+    'manage-booking-page',
+    'data',
+    'insurance-info',
+    'payment',
+    'hotel-info',
+    'new-hotel-page',
+  ],
+  '/packages/[id]': [
+    'new-trip-page',
+    'data',
+    'insurance-info',
+    'city-information',
+    'faqs-data',
+    'hotel-info',
+    'reviews',
+    'flight-info',
+    'new-hotel-page',
+  ],
+  '/giftcard': ['gift-card', 'checkout-page', 'data', 'payment'],
+  '/privacy': ['privacy-page'],
+  '/terms-and-conditions': ['terms-page'],
+  '/partners': ['partners-page'],
+  '/profile': [
+    'profile-page',
+    'data',
+    'home-page',
+    'unsubscribe',
+    'gamification',
+  ],
+  '/unsubscribe': ['unsubscribe-page', 'unsubscribe'],
+  '/help': ['help-page', 'faqs-data'],
+  '/help/[article]': ['help-page'],
+  '/profile/rewards': ['rewards-page'],
+  '/profile/rewards-history': ['rewards-history-page'],
+  '/feedback': ['feedback-page'],
+  '/loyalty': ['loyalty-page'],
+} as const

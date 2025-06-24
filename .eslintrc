@@ -1,0 +1,40 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "next", 
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "unused-imports", 
+    "@typescript-eslint"
+  ],
+  "rules": {
+    // TODO: try to remove all the @next rules
+    "@next/next/no-html-link-for-pages": "off",
+    "@next/next/no-img-element": "off",
+    "@next/next/no-page-custom-font": "off",
+    "@next/next/no-duplicate-head": "off",
+    "@next/next/no-before-interactive-script-outside-document": "off",
+    "@next/next/no-styled-jsx-in-document": "off",
+    "@next/next/no-typos": "off",
+    "react/no-unescaped-entities": "off",
+    "react/no-children-prop": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+		],
+    "no-undef": "warn",
+    "no-redeclare": "warn",
+    "prefer-const": "off"
+  },
+  "globals": {
+    "React": true,
+    "JSX": true
+  }
+}

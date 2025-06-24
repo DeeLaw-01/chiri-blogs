@@ -1,0 +1,61 @@
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+.rdrDayDisabled {
+  background-color: white !important;
+}
+.rdrDateRangePickerWrapper {
+  width: 100%;
+}
+
+.rdrCalendarWrapper {
+  border-radius: 0.375rem;
+  width: 100%;
+}
+
+.rdrMonths {
+  width: 100%
+}
+.rdrMonth {
+  width: 100%;
+}
+
+.rdrDayPassive {
+  opacity: 0;
+}
+
+.rdrDayToday .rdrDayNumber span {
+  font-weight: 300;
+}
+.rdrDayToday .rdrDayNumber span:after {
+  display: none !important;
+}
+
+.rdrMonthName, .rdrMonthAndYearPickers {
+  color: black;
+  font-weight: bolder;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.rdrWeekDay {
+  color: black;
+  font-weight: bolder;
+}
+
+.rdrMonthAndYearPickers select {
+  color: black;
+  font-weight: bold;
+}
+
+@media (max-width: 62.5em) {
+  .rdrDayStartPreview, .rdrDayEndPreview, .rdrDayInPreview {
+    border-color: transparent !important;
+  }
+}
+.rdrSelected,
+.rdrInRange,
+.rdrStartEdge,
+.rdrEndEdge {
+  margin: -1px !important
+}

@@ -1,0 +1,26 @@
+# *
+User-agent: *
+DisAllow: /auth
+DisAllow: /csc
+DisAllow: /unsubscribe
+DisAllow: /packages
+DisAllow: /checkout
+DisAllow: /profile
+DisAllow: /manage-booking/
+Disallow: /*.pdf$
+Disallow: /*.svg$
+Disallow: /*?
+
+User-agent: Morningscore Bot
+Disallow: /city
+Disallow: /cn/?
+Disallow: /blog
+Allow: /en/blog
+
+# Host
+Host: https://www.tryp.com
+
+# Sitemaps
+Sitemap: https://www.tryp.com/sitemap.xml
+Sitemap: https://www.tryp.com/sitemap-0.xml
+Sitemap: https://www.tryp.com/server-sitemap.xml

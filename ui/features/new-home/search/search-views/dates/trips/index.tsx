@@ -6,26 +6,30 @@ import DatesViewMobile from './dates-view-mobile'
 import DatesViewDesktop from './dates-view-desktop'
 import { Dates } from '../../../hooks/useSearchAtoms/types/trip.types'
 import { useSearchAtoms } from '../../../hooks/useSearchAtoms/useSearchAtoms'
+import { useHomeAtoms } from 'ui/features/new-home/hooks/useHomeAtoms'
+import getStateSearch from 'ui/features/new-home/utils/search/getStateSearch'
 
-export default function TripsDatesView() {
+export default function TripsDatesView () {
   const { isMobile } = useResponsiveSizes()
-  const { tripSearch } = useSearchAtoms()
+  const { search } = useSearchAtoms()
+  const { state } = useHomeAtoms()
+  const currentSearch = getStateSearch(state, search)
 
   const [dates, setDates] = useState<Dates>({
-    windowStart: tripSearch?.windowStart,
-    windowEnd: tripSearch?.windowEnd,
-    flexibleDates: tripSearch?.flexibleDates,
-    exactDates: tripSearch?.exactDates,
-    stayLength: tripSearch?.stayLength,
+    windowStart: currentSearch?.windowStart,
+    windowEnd: currentSearch?.windowEnd,
+    flexibleDates: currentSearch?.flexibleDates,
+    exactDates: currentSearch?.exactDates,
+    stayLength: currentSearch?.stayLength
   })
 
   const handleChange = (ranges: RangeKeyDict) => {
     if (!ranges?.selection) return
 
-    setDates((prev) => ({
+    setDates(prev => ({
       ...prev,
       windowStart: ranges.selection.startDate,
-      windowEnd: ranges.selection.endDate,
+      windowEnd: ranges.selection.endDate
     }))
   }
 

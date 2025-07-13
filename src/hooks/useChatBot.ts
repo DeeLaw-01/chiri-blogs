@@ -5,27 +5,27 @@ import generateUUID from 'src/utils/generateUUID'
 
 const WEBSITE_ID = '38befa14-7436-4982-a4e6-8cb5375d7c7e'
 
-export default function useChatBot() {
-  async function show(): Promise<void> {
+export default function useChatBot () {
+  async function show (): Promise<void> {
     Crisp.chat.show()
   }
 
-  function configure(locale: string): void {
+  function configure (locale: string): void {
     if (!isBrowser) return
 
     Crisp.configure(WEBSITE_ID, {
       locale: locale ?? 'en',
-      safeMode: true,
+      safeMode: true
     })
 
     hide()
   }
 
-  function sendMessage(message: string): void {
+  function sendMessage (message: string): void {
     Crisp.message.sendText(message)
   }
 
-  function fireWelcomeEvent(): void {
+  function fireWelcomeEvent (): void {
     const hasBeenOpened = sessionStorage.getItem('chat-opened')
     if (!hasBeenOpened) {
       const userId = generateUUID()
@@ -35,35 +35,37 @@ export default function useChatBot() {
     }
   }
 
-  function hide(): void {
+  function hide (): void {
     Crisp.chat.hide()
   }
 
-  function close(): void {
+  function close (): void {
     Crisp.chat.close()
   }
 
-  function open(): void {
+  function open (): void {
     Crisp.chat.open()
   }
 
-  Crisp.chat.onChatClosed((): void => {
-    close()
-    hide()
-  })
+  if (isBrowser) {
+    Crisp.chat.onChatClosed((): void => {
+      close()
+      hide()
+    })
 
-  Crisp.message.onMessageReceived((): void => {
-    show()
-    open()
-  })
+    Crisp.message.onMessageReceived((): void => {
+      show()
+      open()
+    })
+  }
 
-  function showAndOpen(): void {
+  function showAndOpen (): void {
     open()
     show()
     fireWelcomeEvent()
   }
 
-  function checkoutEvent(): void {
+  function checkoutEvent (): void {
     const hasBeenOpened = sessionStorage.getItem('chat-opened')
     if (!hasBeenOpened) {
       const userId = generateUUID()
@@ -96,7 +98,7 @@ export default function useChatBot() {
       ...(cartId && { cartId: cartId }),
       ...(currency && { currency: currency }),
       ...(cognitoUserId && { cognitoUserId: cognitoUserId }),
-      ...(location && { location: location.locode }),
+      ...(location && { location: location.locode })
     }
   }
 
@@ -108,6 +110,6 @@ export default function useChatBot() {
     showAndOpen,
     configure,
     checkoutEvent,
-    sendMessage,
+    sendMessage
   }
 }

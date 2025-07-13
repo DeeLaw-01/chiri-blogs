@@ -1,7 +1,7 @@
 import { HomeState } from '../../hooks/useHomeAtoms/types'
 import { Search } from '../../search/hooks/useSearchAtoms/types'
 
-export default function getStateSearch(
+export default function getStateSearch (
   state: HomeState | undefined,
   search: Search
 ) {
@@ -10,6 +10,8 @@ export default function getStateSearch(
   switch (state) {
     case HomeState.TRIP:
       return search.trip
+    case HomeState.ROUNDTRIP:
+      return search.roundtrip
     case HomeState.ACCOMMODATION:
       return search.accommodation
     case HomeState.ONEWAY:

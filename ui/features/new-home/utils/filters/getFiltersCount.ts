@@ -3,7 +3,7 @@ import { Filters } from '../../search/hooks/useSearchAtoms/types'
 import getInitialFilterState from './getInitialFiltersState'
 import getStateFilters from './getStateFilters'
 
-export default function getFiltersCount(
+export default function getFiltersCount (
   state: HomeState | undefined,
   filters: Filters
 ): number {
@@ -12,7 +12,9 @@ export default function getFiltersCount(
   const stateFilters = getStateFilters(state, filters)
   const initial = getInitialFilterState(state)
 
-  return Object.keys(stateFilters).filter((k) => {
+  if (!stateFilters || !initial) return 0
+
+  return Object.keys(stateFilters).filter(k => {
     const key = k as keyof typeof stateFilters
     const current = stateFilters[key]
     const initialValue = initial[key]

@@ -1,10 +1,12 @@
 import { HomeState } from '../../hooks/useHomeAtoms/types'
 import { Filters } from '../../search/hooks/useSearchAtoms/types'
 
-export default function getStateFilters(state: HomeState, filters: Filters) {
+export default function getStateFilters (state: HomeState, filters: Filters) {
   switch (state) {
     case HomeState.TRIP:
       return filters.trip
+    case HomeState.ROUNDTRIP:
+      return filters.roundtrip
     case HomeState.ACCOMMODATION:
       return filters.accommodation
     case HomeState.ONEWAY:

@@ -13,7 +13,7 @@ import { useOnewayAtoms } from './useOnewayAtoms'
 import { useHomeAtoms } from '../../hooks/useHomeAtoms'
 import { useSelectedLocation } from 'src/contexts/location'
 
-export default function useOnewayEffects() {
+export default function useOnewayEffects () {
   const searchParams = useSearchParams()
   const query = Object.fromEntries(searchParams!.entries())
   const pathname = usePathname()
@@ -23,10 +23,10 @@ export default function useOnewayEffects() {
   const callback = (data?: any) => {
     switch (data.type) {
       case OnewayResponseType.ONEWAY:
-        setOneway((prev) => [...prev, data.body])
+        setOneway(prev => [...prev, data.body])
         break
       case OnewayResponseType.TRIP:
-        setOnewayTrips((prev) => [...prev, data.body])
+        setOnewayTrips(prev => [...prev, data.body])
         break
       case OnewayResponseType.MODIFICATION:
         setModification(data.body)
@@ -42,7 +42,7 @@ export default function useOnewayEffects() {
     }
   }
   const { trigger, unsubscribe, isLoading, data } = useWSFetch<any>(q, callback)
-  const { trigger: triggerOneway } = useMutation((d) => oneWayTestQuery(d))
+  const { trigger: triggerOneway } = useMutation(d => oneWayTestQuery(d))
   const { forceSearch, setForceSearch } = useHomeAtoms()
   const [selectedCity] = useSelectedLocation()
 
@@ -57,7 +57,7 @@ export default function useOnewayEffects() {
     onewayTrips,
     setShowLoadMore,
     loadMore,
-    setLoadMore,
+    setLoadMore
   } = useOnewayAtoms()
 
   const getQuery = () => {
@@ -77,7 +77,7 @@ export default function useOnewayEffects() {
   }, [loadMore])
 
   const shouldFetch = () => {
-    if (!query.type && query.type !== HomeState.ONEWAY) return false
+    if (query.type && query.type !== HomeState.ONEWAY) return false
     const isEmpty = oneway.length === 0 && onewayTrips.length === 0
     if (isEmpty && !isLoading && retryCount.current < 2) {
       retryCount.current += 1
@@ -113,9 +113,9 @@ export default function useOnewayEffects() {
       query: {
         ...searchQuery,
         load_more: loadMore,
-        initialLocation: getInitialLocation(),
+        initialLocation: getInitialLocation()
       },
-      uuid: newUuid,
+      uuid: newUuid
     })
   }
 

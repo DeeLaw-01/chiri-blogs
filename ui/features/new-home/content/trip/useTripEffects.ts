@@ -14,22 +14,23 @@ import { useLocale } from 'next-intl'
 import {
   EndResponse,
   TripResponse,
-  TripResponseType,
+  TripResponseType
 } from 'src/api/queries/ws/tripWs/trip.type'
 import { useHomeAtoms } from '../../hooks/useHomeAtoms'
 import { NonShownPackages } from 'src/tracking/non-shown-packages'
 import { PackageDetails } from 'src/shared-types/package-details.type'
 import { useSelectedLocation } from 'src/contexts/location'
 import { mapTripSearch } from '../../utils/search/mappers/trip-search/mapTripSearch'
+import { mapRoundTripSearch } from '../../utils/search/mappers/round-trip-search/mapRoundTripSearch'
 import { useSearchAtoms } from '../../search/hooks/useSearchAtoms/useSearchAtoms'
 
-export default function useTripEffects() {
+export default function useTripEffects () {
   const searchParams = useSearchParams()
   const query = Object.fromEntries(searchParams.entries())
   const locale = useLocale()
   const pathname = usePathname()
   const [uuid, setUuid] = useState<string>()
-  const { forceSearch, setForceSearch } = useHomeAtoms()
+  const { forceSearch, setForceSearch, state } = useHomeAtoms()
   const [selectedCity] = useSelectedLocation()
   const retryCount = useRef<number>(0)
 
@@ -42,10 +43,11 @@ export default function useTripEffects() {
     setShowLoadMore,
     loadMore,
     setLoadMore,
-    trips,
+    trips
   } = useTripAtoms()
 
-  const { tripSearch, tripFilters } = useSearchAtoms()
+  const { tripSearch, tripFilters, roundtripSearch, roundtripFilters } =
+    useSearchAtoms()
 
   const callback = (data?: any) => {
     switch (data?.type) {
@@ -68,8 +70,8 @@ export default function useTripEffects() {
     q,
     callback
   )
-  const { trigger: triggerTrip } = useMutation((d) => tripTopicQuery(d, locale))
-  const { trigger: triggerSync } = useMutation((d) => getSyncPackages(d))
+  const { trigger: triggerTrip } = useMutation(d => tripTopicQuery(d, locale))
+  const { trigger: triggerSync } = useMutation(d => getSyncPackages(d))
 
   useEffect(() => {
     if (!shouldFetch()) return
@@ -79,11 +81,25 @@ export default function useTripEffects() {
 
   useEffect(() => {
     // For load more to take latest param for dislike button
-    if (loadMore) handleSearch(mapTripSearch({ ...tripSearch, ...tripFilters }))
+    if (loadMore) {
+      const currentType = query?.type || state
+      const searchParams =
+        currentType === HomeState.ROUNDTRIP
+          ? mapRoundTripSearch({ ...roundtripSearch, ...roundtripFilters })
+          : mapTripSearch({ ...tripSearch, ...tripFilters })
+      handleSearch(searchParams)
+    }
   }, [loadMore])
 
   const shouldFetch = () => {
-    if (query?.type && query.type !== HomeState.TRIP) return false
+    // Use current state if no type in URL, otherwise use URL type
+    const currentType = query?.type || state
+    if (
+      currentType &&
+      currentType !== HomeState.TRIP &&
+      currentType !== HomeState.ROUNDTRIP
+    )
+      return false
     if (!isLoading && trips.length === 0 && retryCount.current < 2) {
       retryCount.current += 1
       return true
@@ -103,12 +119,19 @@ export default function useTripEffects() {
 
   // To get category from category pages
   const getQuery = () => {
-    if (pathname === '/') return query
+    let baseQuery = query
+
+    // If no type in URL but we have a state, use the state as the type
+    if (!query.type && state) {
+      baseQuery = { ...query, type: state }
+    }
+
+    if (pathname === '/') return baseQuery
     const category = pathname?.split('/')[1]
 
     return {
-      ...query,
-      categories: category,
+      ...baseQuery,
+      categories: category
     }
   }
 
@@ -130,10 +153,10 @@ export default function useTripEffects() {
       query: {
         ...queryParam,
         load_more: loadMore,
-        last_shown_trip_id: trips?.map((t) => t.id),
-        initialLocation: getInitialLocation(),
+        last_shown_trip_id: trips?.map(t => t.id),
+        initialLocation: getInitialLocation()
       },
-      uuid: newUuid,
+      uuid: newUuid
     })
   }
 
@@ -142,10 +165,10 @@ export default function useTripEffects() {
       if (trips?.length > 0) return
       unsubscribe()
       triggerSync(uuid, {
-        onSuccess: (data) => {
+        onSuccess: data => {
           setTripsLoading(false)
           setTrips(data as PackageDetails[])
-        },
+        }
       })
     }, 60000)
 

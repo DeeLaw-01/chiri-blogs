@@ -1,7 +1,7 @@
 import { HomeState } from 'ui/features/new-home/hooks/useHomeAtoms/types'
 import {
   AccommodationFilters,
-  AccommodationSearch,
+  AccommodationSearch
 } from './types/accommodation.types'
 import { OnewayFilters, OnewaySearch } from './types/oneway.types'
 import { TripFilters, TripSearch } from './types/trip.types'
@@ -9,6 +9,12 @@ import { TripFilters, TripSearch } from './types/trip.types'
 const initialStates = {
   tripSearch: { type: HomeState.TRIP } as TripSearch,
   tripFilters: {} as TripFilters,
+
+  roundtripSearch: {
+    type: HomeState.ROUNDTRIP,
+    categories: 'single-city'
+  } as TripSearch,
+  roundtripFilters: {} as TripFilters,
 
   accommodationSearch: { type: HomeState.ACCOMMODATION } as AccommodationSearch,
   accommodationFilters: {} as AccommodationFilters,
@@ -24,8 +30,8 @@ const initialStates = {
     vehicle_type: '',
     specific_destination_station: '',
     specific_origin_station: '',
-    travellingStyle: undefined,
-  } as OnewayFilters,
+    travellingStyle: undefined
+  } as OnewayFilters
 }
 
 export default initialStates

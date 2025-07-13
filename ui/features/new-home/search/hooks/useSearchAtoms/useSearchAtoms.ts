@@ -5,7 +5,7 @@ import initialStates from './initialStates'
 import { TripFilters, TripSearch } from './types/trip.types'
 import {
   AccommodationFilters,
-  AccommodationSearch,
+  AccommodationSearch
 } from './types/accommodation.types'
 import { Filters, Search } from './types'
 import { OnewayFilters, OnewaySearch } from './types/oneway.types'
@@ -13,6 +13,8 @@ import { OnewayFilters, OnewaySearch } from './types/oneway.types'
 const atoms = {
   tripSearch: atom<TripSearch | undefined>(undefined),
   tripFilters: atom<TripFilters>(initialStates.tripFilters),
+  roundtripSearch: atom<TripSearch>(initialStates.roundtripSearch),
+  roundtripFilters: atom<TripFilters>(initialStates.roundtripFilters),
   onewaySearch: atom<OnewaySearch>(initialStates.onewaySearch),
   onewayFilters: atom<OnewayFilters>(initialStates.onewayFilters),
   accommodationSearch: atom<AccommodationSearch>(
@@ -20,14 +22,23 @@ const atoms = {
   ),
   accommodationFilters: atom<AccommodationFilters>(
     initialStates.accommodationFilters
-  ),
+  )
 }
 
-export function useSearchAtoms() {
+export function useSearchAtoms () {
   const [tripSearch, setTripSearch] = useAtom(atoms.tripSearch)
   const [tripFilters, setTripFilters] = useAtom(atoms.tripFilters)
   const resetTripFilters = () => setTripFilters(initialStates.tripFilters)
   const resetTripSearch = () => setTripSearch(initialStates.tripSearch)
+
+  const [roundtripSearch, setRoundtripSearch] = useAtom(atoms.roundtripSearch)
+  const [roundtripFilters, setRoundtripFilters] = useAtom(
+    atoms.roundtripFilters
+  )
+  const resetRoundtripFilters = () =>
+    setRoundtripFilters(initialStates.roundtripFilters)
+  const resetRoundtripSearch = () =>
+    setRoundtripSearch(initialStates.roundtripSearch)
 
   const [onewaySearch, setOnewaySearch] = useAtom(atoms.onewaySearch)
   const [onewayFilters, setOnewayFilters] = useAtom(atoms.onewayFilters)
@@ -47,14 +58,16 @@ export function useSearchAtoms() {
 
   const search: Search = {
     trip: tripSearch,
+    roundtrip: roundtripSearch,
     accommodation: accommodationSearch,
-    oneway: onewaySearch,
+    oneway: onewaySearch
   }
 
   const filters: Filters = {
     trip: tripFilters,
+    roundtrip: roundtripFilters,
     accommodation: accommodationFilters,
-    oneway: onewayFilters,
+    oneway: onewayFilters
   }
 
   return {
@@ -64,6 +77,13 @@ export function useSearchAtoms() {
     setTripFilters,
     resetTripFilters,
     resetTripSearch,
+
+    roundtripSearch,
+    setRoundtripSearch,
+    roundtripFilters,
+    setRoundtripFilters,
+    resetRoundtripFilters,
+    resetRoundtripSearch,
 
     onewaySearch,
     setOnewaySearch,
@@ -80,6 +100,6 @@ export function useSearchAtoms() {
     resetAccommodationSearch,
 
     search,
-    filters,
+    filters
   }
 }

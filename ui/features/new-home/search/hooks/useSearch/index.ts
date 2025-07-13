@@ -6,39 +6,46 @@ import { sanitizeQueryParams } from 'src/utils/urlUtils'
 import { TripFilters, TripSearch } from '../useSearchAtoms/types/trip.types'
 import {
   AccommodationFilters,
-  AccommodationSearch,
+  AccommodationSearch
 } from '../useSearchAtoms/types/accommodation.types'
 import {
   OnewayFilters,
-  OnewaySearch,
+  OnewaySearch
 } from '../useSearchAtoms/types/oneway.types'
 import { mapTripSearch } from 'ui/features/new-home/utils/search/mappers/trip-search/mapTripSearch'
+import { mapRoundTripSearch } from 'ui/features/new-home/utils/search/mappers/round-trip-search/mapRoundTripSearch'
 import { useRouter, usePathname } from 'src/i18n/router'
 import { mapOnewaySearch } from 'ui/features/new-home/utils/search/mappers/oneway-search/mapOnewaySearch'
 
-export default function useSearch() {
+export default function useSearch () {
   const router = useRouter()
   const pathname = usePathname()
   const { state } = useHomeAtoms()
   const {
     tripSearch,
     tripFilters,
+    roundtripSearch,
+    roundtripFilters,
     accommodationSearch,
     accommodationFilters,
     onewaySearch,
     onewayFilters,
     resetTripSearch,
     resetTripFilters,
+    resetRoundtripSearch,
+    resetRoundtripFilters,
     resetAccommodationSearch,
     resetAccommodationFilters,
     resetOnewaySearch,
     setTripSearch,
     setTripFilters,
+    setRoundtripSearch,
+    setRoundtripFilters,
     setOnewayFilters,
     setAccommodationFilters,
     setAccommodationSearch,
     setOnewaySearch,
-    resetOneWayFilters,
+    resetOneWayFilters
   } = useSearchAtoms()
 
   const getQuery = (state?: HomeState) => {
@@ -47,6 +54,8 @@ export default function useSearch() {
     switch (state) {
       case HomeState.TRIP:
         return mapTripSearch({ ...tripSearch, ...tripFilters })
+      case HomeState.ROUNDTRIP:
+        return mapRoundTripSearch({ ...roundtripSearch, ...roundtripFilters })
       case HomeState.ACCOMMODATION:
         return { ...accommodationSearch, ...accommodationFilters }
       case HomeState.ONEWAY:
@@ -60,6 +69,9 @@ export default function useSearch() {
     switch (state) {
       case HomeState.TRIP:
         setTripSearch(search as TripSearch)
+        break
+      case HomeState.ROUNDTRIP:
+        setRoundtripSearch(search as TripSearch)
         break
       case HomeState.ACCOMMODATION:
         setAccommodationSearch(search as AccommodationSearch)
@@ -77,6 +89,9 @@ export default function useSearch() {
       case HomeState.TRIP:
         setTripFilters(filters as TripFilters)
         break
+      case HomeState.ROUNDTRIP:
+        setRoundtripFilters(filters as TripFilters)
+        break
       case HomeState.ACCOMMODATION:
         setAccommodationFilters(filters as AccommodationFilters)
         break
@@ -92,6 +107,9 @@ export default function useSearch() {
     switch (state) {
       case HomeState.TRIP:
         resetTripSearch()
+        break
+      case HomeState.ROUNDTRIP:
+        resetRoundtripSearch()
         break
       case HomeState.ACCOMMODATION:
         resetAccommodationSearch()
@@ -109,6 +127,9 @@ export default function useSearch() {
       case HomeState.TRIP:
         resetTripFilters()
         break
+      case HomeState.ROUNDTRIP:
+        resetRoundtripFilters()
+        break
       case HomeState.ACCOMMODATION:
         resetAccommodationFilters()
         break
@@ -121,7 +142,7 @@ export default function useSearch() {
   const makeSearch = (query?: SearchType, newState?: HomeState): void => {
     router.push({
       pathname: pathname,
-      query: sanitizeQueryParams(query ? query : getQuery(newState ?? state)),
+      query: sanitizeQueryParams(query ? query : getQuery(newState ?? state))
     })
   }
 
@@ -130,6 +151,6 @@ export default function useSearch() {
     resetSearchState,
     resetFiltersState,
     updateSearchState,
-    updateFilterState,
+    updateFilterState
   }
 }

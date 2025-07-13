@@ -12,7 +12,7 @@ import { HomeState } from '../hooks/useHomeAtoms/types'
 import { TripCategories } from './trip-categories'
 import OnewayNavbar from './oneway-back'
 
-export default function Categories() {
+export default function Categories () {
   const { isDesktop } = useResponsiveSizes()
   const { trips, setTrips, sortType } = useTripAtoms()
   const { sort } = usePackagesSort(trips, setTrips)
@@ -33,7 +33,9 @@ export default function Categories() {
           {state === HomeState.ONEWAY && <OnewayNavbar />}
           {state && <StateSelect />}
         </HStack>
-        {state === HomeState.TRIP && <TripCategories />}
+        {(state === HomeState.TRIP || state === HomeState.ROUNDTRIP) && (
+          <TripCategories />
+        )}
 
         {isDesktop && <FiltersButton />}
       </HStack>

@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'src/i18n/router'
 
-export default async function BlogPage() {
+export default async function BlogPage () {
   const router = useRouter()
   const [height, setHeight] = useState('100vh')
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -12,7 +12,7 @@ export default async function BlogPage() {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       // Verify the origin for security
-      if (event.origin !== 'https://www.chiri.pk') return
+      if (event.origin !== 'https://chiri-booking-app.vercel.app') return
 
       // Handle the message
       console.log('Received message:', event.data)
@@ -31,12 +31,12 @@ export default async function BlogPage() {
 
   return (
     <Box
-      as="iframe"
+      as='iframe'
       ref={iframeRef}
-      w="100%"
+      w='100%'
       h={height}
       style={{ border: 'none' }}
-      src="https://www.chiri.pk/blogs"
+      src='https://chiri-booking-app.vercel.app/blogs'
     />
   )
 }

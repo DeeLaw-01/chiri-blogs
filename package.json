@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "yarn run missing-translation && next build",
+    "vercel-build": "yarn run missing-translation && yarn run load-translation && next build",
     "build": "next build",
     "analyze": "cross-env ANALYZE=true next build",
     "format": "prettier --ignore-path .gitignore --write .",

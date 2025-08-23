@@ -37,6 +37,7 @@ yarn-error.log*
 # vercel
 .vercel
 
+
 # workflows
 # - Actions per default doesn't have access to make changes to workflows
 # - this is a workaround to secure 'Prettier' doesn't fail.

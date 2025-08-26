@@ -3,36 +3,33 @@ import Container from 'ui/primitives/Container'
 import Heading from 'ui/primitives/Heading'
 import SearchPill from '../search/search-pill'
 import { HomeOverwriteData } from '../types/home.type'
-import { getImageProps } from 'next/image'
-import { ImgProps } from 'next/dist/shared/lib/get-img-props'
 
 type HomeHeaderProps = {
   data: HomeOverwriteData
 }
 
 export default function HomeHeader({ data }: HomeHeaderProps) {
-  const common = {
-    alt: data.title || 'Background Image',
-    fill: true,
-    priority: true,
-    sizes: '100vw',
-    placeholder: data.blurImage ? 'blur' : 'empty',
-    blurDataURL: data.blurImage,
-  } as ImgProps
-
-  const {
-    props: { srcSet: desktopImg },
-  } = getImageProps({ ...common, src: data.image })
-  const {
-    props: { srcSet: mobileImg, ...rest },
-  } = getImageProps({ ...common, src: data.imageSmall ?? data.image })
+  const staticImage = '/static/b2b/chiri/herosection.webp'
+  const staticImageMobile = '/static/b2b/chiri/herosection.webp'
 
   return (
     <Box w="full" pos="relative" h={{ base: '15rem', md: '22rem' }}>
       <picture>
-        <source media="(max-width: 768px)" srcSet={mobileImg} />
-        <source media="(min-width: 769px)" srcSet={desktopImg} />
-        <img {...rest} className="header-img" />
+        <source media="(max-width: 768px)" srcSet={staticImageMobile} />
+        <source media="(min-width: 769px)" srcSet={staticImage} />
+        <img
+          src={staticImage}
+          alt={data.title || 'Background Image'}
+          className="header-img"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+        />
       </picture>
 
       {/* Overlay for gradient effect */}
@@ -54,7 +51,7 @@ export default function HomeHeader({ data }: HomeHeaderProps) {
         >
           <Box textShadow="0px 0px 15px black" color="_white">
             <Heading as="h1" fontSize={{ base: '2xl', md: '4xl' }}>
-              {data.title}
+              {data.title}sdssssd
             </Heading>
             <Heading as="h2" fontSize={{ base: 'sm', md: '2xl' }}>
               {data.subtitle}

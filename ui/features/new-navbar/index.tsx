@@ -44,7 +44,7 @@ function Navbar({ ...rest }: NavbarProps): JSX.Element {
         <HStack justify="space-between" w="full">
           <HStack>
             <Link href="/">
-              <Box transform={{ base: 'scale(1)', md: 'scale(1.3)' }}>
+              <Box transform={{ base: 'scale(0.8)', md: 'scale(0.8)' }}>
                 <LogoIcon height="40" />
               </Box>
             </Link>

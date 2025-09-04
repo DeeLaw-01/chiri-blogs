@@ -11,10 +11,6 @@ import { usePathname } from 'src/i18n/router'
 import { useLocale } from 'next-intl'
 import GlobalModals from 'ui/shared/modals'
 
-const DynamicEmailSignUpModal = dynamic(() => {
-  return import('ui/features/signup-banner/modal')
-})
-
 const DynamicCookieConsent = dynamic(() => import('ui/features/cookie-consent'))
 
 const DynamicNotifications = dynamic(() => {
@@ -51,7 +47,6 @@ export default function MainProvider({ children }) {
     <>
       <JSONLD path={path} />
       {children}
-      <DynamicEmailSignUpModal />
       <DynamicCookieConsent />
       <DynamicNotifications />
       <GlobalModals />

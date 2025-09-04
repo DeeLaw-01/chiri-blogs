@@ -22,6 +22,7 @@ NEXT_PUBLIC_STRIPE_DEV_KEY=pk_test_51JxVI8IyoWyi6sQ5mPM1Uj3WmweJB8vu0whK45TZ0YGr
 NEXT_PUBLIC_STRIPE_KEY=pk_live_51JxVI8IyoWyi6sQ54c8TK07I3eQNkCfsjA2phgOpMakoRvQnShBTwp9z2OwM7DGJRMgJwBwGAsTPZ6LHqpJnEMbK00hH9mI1Zx
 ```
 
+
 _Note: If you add a new entry to the env file, don't forget to add it here._
 
 Now you can run the development server by simply running:

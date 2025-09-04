@@ -53,7 +53,7 @@ const testArticle5 = `
 <h2>Visa or Transit Visa</h2>
 <p>If any of the countries on your itinerary require a visa, you will generally need to present it at the airport during check-in, security screening, or immigration. You do not need to enter visa information when checking in online, but you may still be required to show your visa at the check-in counter upon arrival at the airport. Certain transport carriers may issue a "temporary boarding pass," which will be exchanged for the official boarding pass once your visa has been verified. If this is necessary, it will be indicated on the temporary document.</p>
 
-<p>We always recommend checking visa requirements by contacting the relevant embassies or visiting the official websites of all the countries included in your journey before departure. Tryp.com accepts no responsibility for any visa-related issues.</p>
+<p>We always recommend checking visa requirements by contacting the relevant embassies or visiting the official websites of all the countries included in your journey before departure. Chiri.pk accepts no responsibility for any visa-related issues.</p>
 
 <h2>Health Documents</h2>
 <p>Requirements for health and travel documents vary based on your itinerary, including destination, point of departure, and transport carrier policies. In some instances, you may be asked to complete an entry form, present a general health certificate or proof of vaccination, or simply confirm that you are aware of the applicable regulations.</p><p>COVID-19 documentation is an example of such requirements, however, it is increasingly rare for it to be mandatory in many countries anymore. Nevertheless, always verify whether there are specific requirements for your destinations.</p>
@@ -70,25 +70,25 @@ const testArticle6 = `
 `
 
 const testArticle7 = `
-<h2>What Makes Tryp.com Unique?</h2>
-<p>Traveling should be exciting, not stressful. Yet, planning a trip can often feel overwhelming—comparing countless flights, finding the best prices, booking hotels, and ensuring everything aligns perfectly. At Tryp.com, we do the hard work for you. Our AI-driven platform scans millions of routes, airlines, and accommodations to create seamless, optimized trips tailored to your preferences. No more endless searching or second-guessing; we combine flights, hotels, and even unique travel experiences into one simple itinerary.</p>
+<h2>What Makes Chiri.pk Unique?</h2>
+<p>Traveling should be exciting, not stressful. Yet, planning a trip can often feel overwhelming—comparing countless flights, finding the best prices, booking hotels, and ensuring everything aligns perfectly. At Chiri.pk, we do the hard work for you. Our AI-driven platform scans millions of routes, airlines, and accommodations to create seamless, optimized trips tailored to your preferences. No more endless searching or second-guessing; we combine flights, hotels, and even unique travel experiences into one simple itinerary.</p>
 
-<p>What truly sets Tryp.com apart is our ability to create dynamic trips that wouldn’t be possible through traditional search engines. By combining different airlines and routes that aren’t typically sold together, we unlock better prices and more flexible travel options. Whether you’re planning a weekend getaway or a multi-city adventure, our technology ensures that you get the most efficient and cost-effective journey.</p>
+<p>What truly sets Chiri.pk apart is our ability to create dynamic trips that wouldn’t be possible through traditional search engines. By combining different airlines and routes that aren’t typically sold together, we unlock better prices and more flexible travel options. Whether you’re planning a weekend getaway or a multi-city adventure, our technology ensures that you get the most efficient and cost-effective journey.</p>
 
 <p>Another key differentiator is our commitment to automation and convenience. We provide <a href="/help/automatic-and-manual-check-in">automatic check-in</a> for free on all flights, meaning you won’t have to worry about remembering to do it yourself. Your boarding passes are sent directly to you, so you can skip the hassle and focus on your trip.</p>
 
 <h2>Effortless Travel, From Start to Finish</h2>
-<p>Booking your trip is just the beginning. With Tryp.com, managing your journey is just as smooth. Need extra baggage or a specific seat? Our integrated <a href="/help/how-to-add-baggage-seatings-and-extras">marketplace</a> allows you to add these extras with ease. Changes to your itinerary? Our <a href="/help/customer-support">24/7 customer support</a> team is always available to assist you. We’ve designed every part of the experience to be seamless, from the moment you start searching to the day you return home.</p>
+<p>Booking your trip is just the beginning. With Chiri.pk, managing your journey is just as smooth. Need extra baggage or a specific seat? Our integrated <a href="/help/how-to-add-baggage-seatings-and-extras">marketplace</a> allows you to add these extras with ease. Changes to your itinerary? Our <a href="/help/customer-support">24/7 customer support</a> team is always available to assist you. We’ve designed every part of the experience to be seamless, from the moment you start searching to the day you return home.</p>
 
-<p>At the core of Tryp.com is our love for travel. We built this platform because we believe exploring the world should be effortless, affordable, and enjoyable. Traditional booking platforms focus on transactions—our focus is on creating journeys. Our technology ensures you’re getting the best deals without the stress, so all you need to worry about is where you’ll go next.</p>
+<p>At the core of Chiri.pk is our love for travel. We built this platform because we believe exploring the world should be effortless, affordable, and enjoyable. Traditional booking platforms focus on transactions—our focus is on creating journeys. Our technology ensures you’re getting the best deals without the stress, so all you need to worry about is where you’ll go next.</p>
 
 <p><i>There's always a reason to go.</i></p>
 
 `
 
-const testArticle8 = `<h2>How to Book at Tryp.com – A Simple and Seamless Process</h2>
+const testArticle8 = `<h2>How to Book at Chiri.pk – A Simple and Seamless Process</h2>
 
-<p>At Tryp.com, we believe booking your trip should be as easy as the journey itself. Our intuitive platform allows you to find and purchase flights, accommodation, and other travel essentials in just a few clicks. Whether you're planning a quick weekend escape or a multi-city adventure, we make the process fast, secure, and hassle-free. Here’s a detailed guide to help you complete your booking smoothly.</p>
+<p>At Chiri.pk, we believe booking your trip should be as easy as the journey itself. Our intuitive platform allows you to find and purchase flights, accommodation, and other travel essentials in just a few clicks. Whether you're planning a quick weekend escape or a multi-city adventure, we make the process fast, secure, and hassle-free. Here’s a detailed guide to help you complete your booking smoothly.</p>
 
 <h2>Finding and Selecting Your Ideal Trip</h2>
 
@@ -111,7 +111,7 @@ const testArticle8 = `<h2>How to Book at Tryp.com – A Simple and Seamless Proc
 
 <p>We understand that every traveler is unique, which is why we offer several options to personalize your trip. If seat selection is available for your flight, you can choose your preferred seat—whether you want a window view, to sit together with your travel companions, or you’re comfortable with random allocation. This flexibility allows you to tailor your journey to your preferences.</p>
 
-<p>For added peace of mind, we also offer <strong>Tryp.com Flex</strong>, a flexible travel insurance option. With Tryp.com Flex, you can receive 80% of your trip cost back if you need to cancel. This feature gives you the freedom to book confidently, knowing that your plans can change without significant financial loss.</p>
+<p>For added peace of mind, we also offer <strong>Chiri.pk Flex</strong>, a flexible travel insurance option. With Chiri.pk Flex, you can receive 80% of your trip cost back if you need to cancel. This feature gives you the freedom to book confidently, knowing that your plans can change without significant financial loss.</p>
 
 <h2>Secure Payment and Booking Confirmation</h2>
 
@@ -128,16 +128,16 @@ const testArticle8 = `<h2>How to Book at Tryp.com – A Simple and Seamless Proc
 
 const testArticle9 = `
 <h2>Cashback on your trips</h2>
-<p>When you book through Tryp.com, you can earn cashback in the form of Tryp.com Coins. These are automatically added to your account after each eligible purchase when you're logged in. To earn Coins, make sure you're logged into your Tryp.com account before completing a booking. It can take up to 24h to receive the coins through your profile. To see your current amount of coins please go to your profile, and check the rewards.</p>
+<p>When you book through Chiri.pk, you can earn cashback in the form of Chiri.pk Coins. These are automatically added to your account after each eligible purchase when you're logged in. To earn Coins, make sure you're logged into your Chiri.pk account before completing a booking. It can take up to 24h to receive the coins through your profile. To see your current amount of coins please go to your profile, and check the rewards.</p>
 
-<h2>What are Tryp.com Coins worth?</h2>
-<p>100 Tryp.com Coins are approximately equal to 10 EUR. The value can vary slightly depending on how the coins are used, but you’ll always see the exact discount during checkout.</p>
+<h2>What are Chiri.pk Coins worth?</h2>
+<p>100 Chiri.pk Coins are approximately equal to 10 EUR. The value can vary slightly depending on how the coins are used, but you’ll always see the exact discount during checkout.</p>
 
 <h2>How to use Coins</h2>
-<p>You can redeem your Tryp.com Coins at checkout. If your balance is high enough, you’ll be able to apply a discount to your booking, including flights, accommodation, gift cards, and more. Just select the option to use your Coins during payment.</p>
+<p>You can redeem your Chiri.pk Coins at checkout. If your balance is high enough, you’ll be able to apply a discount to your booking, including flights, accommodation, gift cards, and more. Just select the option to use your Coins during payment.</p>
 
 <h2>More travel, more savings</h2>
-<p>The more you book, the more Coins you earn — and with continued use, you may unlock higher cashback rates or additional offers in the future. Coins can only be used on Tryp.com and are non-transferable.</p>
+<p>The more you book, the more Coins you earn — and with continued use, you may unlock higher cashback rates or additional offers in the future. Coins can only be used on Chiri.pk and are non-transferable.</p>
 `
 
 let article = {

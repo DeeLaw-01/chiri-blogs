@@ -51,7 +51,7 @@ export default function HomeHeader({ data }: HomeHeaderProps) {
         >
           <Box textShadow="0px 0px 15px black" color="_white">
             <Heading as="h1" fontSize={{ base: '2xl', md: '4xl' }}>
-              {data.title}sdssssd
+              {data.title}
             </Heading>
             <Heading as="h2" fontSize={{ base: 'sm', md: '2xl' }}>
               {data.subtitle}

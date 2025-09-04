@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Tryp.com | Customer Service Challenge',
+    absolute: 'Chiri.pk | Customer Service Challenge',
   },
   description: '',
   robots: {

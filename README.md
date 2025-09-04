@@ -1,4 +1,4 @@
-# Tryp.com FE Codebase.
+# Chiri.pk FE Codebase.
 
 <img src="public/preview.png" style="border-radius:8px">
 

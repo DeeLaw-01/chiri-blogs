@@ -16,7 +16,7 @@ const FyensLink =
   'https://fyens.dk/artikel/dr%C3%B8mmefabrikken-p%C3%A5-syddansk-universitet'
 
 const GOOGLE_REVIEW_LINK =
-  'https://www.google.com/maps/place/Tryp.com/@55.3742032,10.4293531,17z/data=!4m8!3m7!1s0xa05012ec0c6c5427:0x5996e96915298552!8m2!3d55.3742032!4d10.4293531!9m1!1b1!16s%2Fg%2F11rgd4jvwy'
+  'https://www.google.com/maps/place/Chiri.pk/@55.3742032,10.4293531,17z/data=!4m8!3m7!1s0xa05012ec0c6c5427:0x5996e96915298552!8m2!3d55.3742032!4d10.4293531!9m1!1b1!16s%2Fg%2F11rgd4jvwy'
 
 export {
   TRUSTPILOT_REVIEW_LINK,

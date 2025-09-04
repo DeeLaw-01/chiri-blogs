@@ -48,7 +48,7 @@ export default function EarnPointsBanner({ ...rest }: CardProps) {
               Get <b>1000</b> Tryp points
             </Heading>
             <Text fontSize="2xs">
-              Purchase with accommodation and earn 1000 Tryp.com coins
+              Purchase with accommodation and earn 1000 Chiri.pk coins
             </Text>
           </Box>
 

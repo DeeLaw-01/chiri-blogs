@@ -17,7 +17,7 @@ const theme = {
     _lightgreen: '#eeffeb',
     _red: '#E53E3E',
     _lightred: '#FAEAEA',
-    _orange: '#dd6b20',
+    _orange: '#1E8667',
     _lightorange: '#fefcbf',
     _purple: '#7F39FB',
     _lightpurple: '#EEE3FA',

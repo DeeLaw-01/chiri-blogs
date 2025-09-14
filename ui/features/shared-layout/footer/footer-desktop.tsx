@@ -37,7 +37,7 @@ export default function FooterDesktop({ phone }: FooterDesktopProps) {
             st="footer.company.information"
             sd={{ company_name: CONFIG_COMPANY.COMPANY_NAME }}
           /> */}
-          <Text mt={2}>
+          <Text mt={2} mb={4}>
             Copyright 2025 Chiri.pk Private Limited. All rights reserved.
           </Text>
           {/* <Text st="footer.contact.address" /> */}
@@ -48,7 +48,8 @@ export default function FooterDesktop({ phone }: FooterDesktopProps) {
           >
             <Text st="footer.contact.phone" />
           </Link> */}
-          <IataIcon height="40" fill={theme.colors._black} />
+          <IataIcon height="50" fill={theme.colors._black} />
+          <Text mt={2}>Chiri.pk is registered under IATA</Text>
         </Box>
         <SimpleGrid columns={4} spacing={10} w="full">
           {Object.keys(FOOTER_LINKS).map((key) => {

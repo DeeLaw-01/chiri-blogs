@@ -2,6 +2,7 @@
 
 import { Box, Flex, FlexProps, HStack } from '@chakra-ui/react'
 import LogoIcon from '@/icons/logo.svg'
+import LogoWhiteIcon from '@/icons/logo-white.svg'
 import Container from 'ui/primitives/Container'
 
 import { memo } from 'react'
@@ -44,8 +45,17 @@ function Navbar({ ...rest }: NavbarProps): JSX.Element {
         <HStack justify="space-between" w="full">
           <HStack>
             <Link href="/">
-              <Box transform={{ base: 'scale(0.8)', md: 'scale(0.8)' }}>
-                <LogoIcon height="40" />
+              <Box
+                transform={{
+                  base: transparent ? 'scale(0.5)' : 'scale(0.8)',
+                  md: 'scale(0.8)',
+                }}
+              >
+                {transparent ? (
+                  <LogoWhiteIcon height="80" />
+                ) : (
+                  <LogoIcon height="40" />
+                )}
               </Box>
             </Link>
           </HStack>

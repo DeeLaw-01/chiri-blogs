@@ -24,7 +24,6 @@ interface EmailSignupFormProps extends BoxProps {
 }
 export default function EmailSignupForm({
   textColor = '_black',
-
   header = 'common.footer.email.header',
   isFooter,
   campaign,

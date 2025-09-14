@@ -70,7 +70,9 @@ export default function FooterMobile({ phone }: { phone: string }) {
           sd={{ company_name: CONFIG_COMPANY.COMPANY_NAME }}
           mt={2}
         /> */}
-        <Text mt={2}>Chiri.pk is a company registered in Pakistan.</Text>
+        <Text mt={2} mb={4}>
+          Chiri.pk is a company registered in Pakistan.
+        </Text>
 
         {/* <Text st="footer.contact.address" /> */}
         {/* <Link
@@ -81,7 +83,8 @@ export default function FooterMobile({ phone }: { phone: string }) {
           <Text st="footer.contact.phone" />
         </Link> */}
 
-        <IataIcon height="30" fill={theme.colors._black} />
+        <IataIcon height="40" fill={theme.colors._black} />
+        <Text mt={2}>Chiri.pk is a company registered under IATA.</Text>
 
         {/* <HStack>
           <IataIcon height="30" fill={theme.colors._black} />
@@ -124,6 +127,11 @@ export default function FooterMobile({ phone }: { phone: string }) {
             )
           })}
         </Wrap>
+      </Box>
+      <Box w="full" display="flex" justifyContent="center">
+        <Text mt={2} mb={4} fontSize="xs" textAlign={'center'} color={'_gray'}>
+          Copyright 2025 Chiri.pk Private Limited. All rights reserved.
+        </Text>
       </Box>
     </VStack>
   )

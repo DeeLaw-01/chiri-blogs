@@ -7,11 +7,10 @@ import {
 import './custom-styles.css'
 import { useResponsiveSizes } from 'src/contexts/responsive'
 import { useEffect, useState } from 'react'
-import { useLocale } from 'next-intl'
 import enUS from 'date-fns/locale/en-US'
 
 export default function DateRangePicker(props: DateRangePickerProps) {
-  const locale = useLocale()
+  const locale = 'en'
   const [lang, setLang] = useState<Locale>(enUS)
   const { isMobile } = useResponsiveSizes()
 

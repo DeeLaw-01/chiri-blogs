@@ -44,7 +44,7 @@ export const Default = [
   },
   {
     key: 'common.footer.blog',
-    link: '/blog',
+    link: '/blogs',
     icon: NewspaperIcon,
   },
 ] as MenuItemType[]

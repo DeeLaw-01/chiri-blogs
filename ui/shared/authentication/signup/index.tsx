@@ -10,7 +10,6 @@ import PasswordInput from './inputs/password'
 import NameInput from './inputs/name'
 import { signUp } from 'src/utils/userProfileUtils'
 import { AuthState, useAuthAtoms } from '../useAuthAtoms'
-import { useLocale } from 'next-intl'
 
 type Form = {
   name: string
@@ -19,7 +18,8 @@ type Form = {
 }
 
 export default function Signup(): JSX.Element {
-  const locale = useLocale()
+  // Always use English locale
+  const locale = 'en'
   const { setState } = useAuthAtoms()
   const [error, setError] = useState<boolean>(false)
 

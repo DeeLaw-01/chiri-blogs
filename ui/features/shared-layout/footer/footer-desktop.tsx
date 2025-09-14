@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { theme } from 'src/styles/theme'
 import Link from 'ui/primitives/Link'
+import NextLink from 'next/link'
 import Text from 'ui/primitives/Text'
 
 import {
@@ -138,6 +139,16 @@ export default function FooterDesktop({ phone }: FooterDesktopProps) {
 }
 
 export const FooterLink = ({ link }: { link: FooterLinkType }) => {
+  // Special handling for /blogs link - use NextLink to avoid locale prefix
+  if (link.path === '/blogs') {
+    return (
+      <NextLink href="/blogs" style={{ textDecoration: 'none' }}>
+        <Text notag st={link.key} fontSize="sm" color="_gray" />
+      </NextLink>
+    )
+  }
+
+  // Use regular intl Link for all other links
   return (
     <Link href={link.path} fontSize="sm" color="_gray">
       <Text notag st={link.key} />

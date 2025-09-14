@@ -1,4 +1,3 @@
-import { useLocale } from 'next-intl'
 import { fetcher } from './fetcher/fetcher'
 import { Query } from './fetcher/fetcher.type'
 import useSWRMutation, {
@@ -14,7 +13,8 @@ export default function useMutation<T, E = unknown>(
   query: QueryType,
   options?: SWRMutationConfiguration<T, E, Key, unknown, T>
 ): SWRMutationResponse<T, E, Key, unknown> {
-  const locale = useLocale()
+  // Always use English locale
+  const locale = 'en'
   const dynamic = typeof query === 'function'
 
   return useSWRMutation<T, E, Key, unknown>(

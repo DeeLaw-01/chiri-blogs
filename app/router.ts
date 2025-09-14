@@ -1,7 +1,6 @@
 import { useRouter as useRouterFromNext } from 'next-nprogress-bar'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
-import locales from 'src/data/locales'
 
 export function useRouter() {
   const router = useRouterFromNext()
@@ -10,41 +9,15 @@ export function useRouter() {
 
   const query = useMemo(() => Object.fromEntries(searchParams), [searchParams])
 
-  const pathnameWithoutLocale = useMemo(() => {
-    const localesArr = locales.map((locale) => locale.value)
-    let replacedPathName = pathname
+  // Since we removed locale prefixes, pathname is already clean
+  const pathnameWithoutLocale = pathname
 
-    localesArr.forEach((locale) => {
-      if (pathname.startsWith(`/${locale}`)) {
-        replacedPathName = pathname.replace(`/${locale}`, '/')
-      }
+  // Always use English locale
+  const localeFromPathname = 'en'
 
-      if (pathname.startsWith(`/${locale}/`)) {
-        replacedPathName = pathname.replace(`/${locale}/`, '/')
-      }
-    })
-
-    return replacedPathName
-  }, [pathname])
-
-  const localeFromPathname = useMemo(() => {
-    const localesArr = locales.map((locale) => locale.value)
-    let locale = 'en'
-
-    localesArr.forEach((localeValue) => {
-      if (pathname.startsWith(`/${localeValue}`)) {
-        locale = localeValue
-      }
-
-      if (pathname.startsWith(`/${localeValue}/`)) {
-        locale = localeValue
-      }
-    })
-
-    return locale
-  }, [pathname])
-
-  const push = (param) => {
+  const push = (
+    param: string | { pathname?: string; query?: Record<string, string> }
+  ) => {
     if (typeof param === 'string') {
       router.push(param)
     } else {
@@ -54,7 +27,7 @@ export function useRouter() {
       )
 
       Object.entries(param.query || {}).forEach(([key, value]) => {
-        url.searchParams.append(key, value)
+        url.searchParams.append(key, value as string)
       })
 
       router.push(url.toString())

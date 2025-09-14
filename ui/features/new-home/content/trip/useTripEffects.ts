@@ -10,11 +10,10 @@ import { HomeState } from '../../hooks/useHomeAtoms/types'
 import { getSyncPackages } from 'src/api/queries/get/home/getSyncPackages'
 import { usePathname } from 'src/i18n/router'
 import { useSearchParams } from 'next/navigation'
-import { useLocale } from 'next-intl'
 import {
   EndResponse,
   TripResponse,
-  TripResponseType
+  TripResponseType,
 } from 'src/api/queries/ws/tripWs/trip.type'
 import { useHomeAtoms } from '../../hooks/useHomeAtoms'
 import { NonShownPackages } from 'src/tracking/non-shown-packages'
@@ -24,10 +23,10 @@ import { mapTripSearch } from '../../utils/search/mappers/trip-search/mapTripSea
 import { mapRoundTripSearch } from '../../utils/search/mappers/round-trip-search/mapRoundTripSearch'
 import { useSearchAtoms } from '../../search/hooks/useSearchAtoms/useSearchAtoms'
 
-export default function useTripEffects () {
+export default function useTripEffects() {
   const searchParams = useSearchParams()
   const query = Object.fromEntries(searchParams.entries())
-  const locale = useLocale()
+  const locale = 'en'
   const pathname = usePathname()
   const [uuid, setUuid] = useState<string>()
   const { forceSearch, setForceSearch, state } = useHomeAtoms()
@@ -43,7 +42,7 @@ export default function useTripEffects () {
     setShowLoadMore,
     loadMore,
     setLoadMore,
-    trips
+    trips,
   } = useTripAtoms()
 
   const { tripSearch, tripFilters, roundtripSearch, roundtripFilters } =
@@ -70,8 +69,8 @@ export default function useTripEffects () {
     q,
     callback
   )
-  const { trigger: triggerTrip } = useMutation(d => tripTopicQuery(d, locale))
-  const { trigger: triggerSync } = useMutation(d => getSyncPackages(d))
+  const { trigger: triggerTrip } = useMutation((d) => tripTopicQuery(d, locale))
+  const { trigger: triggerSync } = useMutation((d) => getSyncPackages(d))
 
   useEffect(() => {
     if (!shouldFetch()) return
@@ -131,7 +130,7 @@ export default function useTripEffects () {
 
     return {
       ...baseQuery,
-      categories: category
+      categories: category,
     }
   }
 
@@ -153,10 +152,10 @@ export default function useTripEffects () {
       query: {
         ...queryParam,
         load_more: loadMore,
-        last_shown_trip_id: trips?.map(t => t.id),
-        initialLocation: getInitialLocation()
+        last_shown_trip_id: trips?.map((t) => t.id),
+        initialLocation: getInitialLocation(),
       },
-      uuid: newUuid
+      uuid: newUuid,
     })
   }
 
@@ -165,10 +164,10 @@ export default function useTripEffects () {
       if (trips?.length > 0) return
       unsubscribe()
       triggerSync(uuid, {
-        onSuccess: data => {
+        onSuccess: (data) => {
           setTripsLoading(false)
           setTrips(data as PackageDetails[])
-        }
+        },
       })
     }, 60000)
 

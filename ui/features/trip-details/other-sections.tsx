@@ -1,5 +1,5 @@
 import { VStack } from '@chakra-ui/react'
-import { TabSections } from 'app/[locale]/packages/[id]/package-page'
+import { TabSections } from 'app/packages/[id]/package-page'
 import Button from 'ui/primitives/Button'
 import Text from 'ui/primitives/Text'
 

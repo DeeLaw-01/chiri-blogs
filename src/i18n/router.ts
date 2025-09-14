@@ -1,11 +1,10 @@
 import { defineRouting } from 'next-intl/routing'
 import { createNavigation } from 'next-intl/navigation'
-import locales from 'src/data/locales'
 
 export const routing = defineRouting({
-  locales: locales.map((locale) => locale.value),
-
+  locales: ['en'], // Only use English locale
   defaultLocale: 'en',
+  localePrefix: 'never', // Remove locale prefixes from URLs
 })
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =

@@ -3,6 +3,7 @@ import RightArrowSmallIcon from '@/icons/arrow-right-small.svg'
 import theme from 'src/styles/theme'
 import Text from 'ui/primitives/Text'
 import Link from 'ui/primitives/Link'
+import NextLink from 'next/link'
 import { MenuItemType } from './data'
 
 type MenuItemProps = {
@@ -37,6 +38,17 @@ export default function MenuItem({ item, children, ...rest }: MenuItemProps) {
 
   if (item.link) {
     const isQueryParamLink = item.link.includes('?')
+
+    // Special handling for /blogs link - use NextLink to avoid locale prefix
+    if (item.link === '/blogs') {
+      return (
+        <NextLink href="/blogs" style={{ textDecoration: 'none' }}>
+          <Content />
+        </NextLink>
+      )
+    }
+
+    // Use regular intl Link for all other links
     return (
       <Link
         href={item.link}

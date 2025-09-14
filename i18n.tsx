@@ -1,6 +1,6 @@
 import { getRequestConfig } from 'next-intl/server'
 import { ReactNode } from 'react'
-import { useMessages, NextIntlClientProvider, useLocale } from 'next-intl'
+import { useMessages, NextIntlClientProvider } from 'next-intl'
 
 import fs from 'fs'
 import path from 'path'
@@ -15,7 +15,7 @@ type IntlProviderProps = {
 }
 
 export function IntlProvider({ page, children }: IntlProviderProps) {
-  const locale = useLocale()
+  const locale = 'en'
   const messages = useMessages()
 
   return (

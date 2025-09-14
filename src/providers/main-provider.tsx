@@ -8,7 +8,6 @@ import { isBrowser } from 'src/data/environments'
 import JSONLD from 'ui/shared/json-ld'
 import useClarity from 'src/hooks/useClarity'
 import { usePathname } from 'src/i18n/router'
-import { useLocale } from 'next-intl'
 import GlobalModals from 'ui/shared/modals'
 
 const DynamicCookieConsent = dynamic(() => import('ui/features/cookie-consent'))
@@ -24,9 +23,14 @@ const pageview = (url: string) => {
   })
 }
 
-export default function MainProvider({ children }) {
+export default function MainProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const path = usePathname()
-  const locale = useLocale()
+  // Always use English locale
+  const locale = 'en'
   const { configure: configureChatBot } = useChatBot()
   const { configure: configureClarity } = useClarity()
   useUserOnline()
@@ -36,7 +40,7 @@ export default function MainProvider({ children }) {
 
     configureChatBot(locale)
     configureClarity()
-  }, [])
+  }, [configureChatBot, configureClarity, locale])
 
   // pushing pages for analytics
   useEffect(() => {

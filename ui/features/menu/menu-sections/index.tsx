@@ -1,8 +1,8 @@
 import { Divider } from '@chakra-ui/react'
 import Heading from 'ui/primitives/Heading'
 import Text from 'ui/primitives/Text'
-import { Default, Help, Legal, Language, Currency, Support } from './data'
-import CountryFlag from 'ui/shared/country-flag'
+import { Default, Help, Legal, Currency, Support } from './data'
+// import CountryFlag from 'ui/shared/country-flag'
 import MenuItem from './menu-item'
 import { useParams } from 'next/navigation'
 import locales from 'src/data/locales'
@@ -16,7 +16,18 @@ export default function MenuSections() {
   const { selectedCurrency } = useSelectedCurrency()
   const { setShowCurrency, setShowLanguage } = useMenuAtoms()
   const { locale } = useParams()
-  const location = locales.find((l) => l.value === locale) as Locale
+
+  // Default to 'en' (English) when locale is not available (e.g., on blog pages)
+  const currentLocale = locale || 'en'
+  const location = locales.find((l) => l.value === currentLocale) as Locale
+
+  // Safety fallback in case locale lookup fails
+  const safeLocation = location || {
+    value: 'en',
+    label: 'English',
+    countryName: 'GB',
+    code: 'en-gb',
+  }
 
   return (
     <>
@@ -28,9 +39,9 @@ export default function MenuSections() {
           {selectedCurrency?.code}
         </Text>
       </MenuItem>
-      <MenuItem item={Language} onClick={() => setShowLanguage(true)}>
-        <CountryFlag height={20} width={20} country={location.countryName} />
-      </MenuItem>
+      {/* <MenuItem item={Language} onClick={() => setShowLanguage(true)}>
+        <CountryFlag height={20} width={20} country={safeLocation.countryName} />
+      </MenuItem> */}
       <Divider my={5} />
       <Heading as="h2" mb={2} st="common.hamburger.section.legal" />
 

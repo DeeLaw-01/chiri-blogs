@@ -3,7 +3,6 @@ import { ReactNode, useEffect } from 'react'
 import { callManageBooking } from '../api/manage-booking'
 import type { AuthData } from '../types/auth-data.type'
 import { useSearchParams } from 'next/navigation'
-import { useLocale } from 'next-intl'
 
 const atoms = {
   authData: atom<AuthData | null>(null),
@@ -14,7 +13,7 @@ const atoms = {
 const AuthDataProvider = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams()
   const query = searchParams ? Object.fromEntries(searchParams.entries()) : {}
-  const locale = useLocale()
+  const locale = 'en'
   const [authData, setAuthData] = useAtom(atoms.authData)
 
   useEffect(() => {

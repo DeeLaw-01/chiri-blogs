@@ -3,7 +3,6 @@ import RootProvider from 'src/providers/root-provider'
 import ResponsizeSizeProvider from 'src/contexts/responsive'
 import { IntlProvider } from 'i18n'
 import { serverFetch } from 'src/api/serverFetch'
-import { getLocale } from 'next-intl/server'
 import { cookies } from 'next/headers'
 import userLocationQuery from 'src/api/queries/get/userLocationQuery'
 import { Location } from 'src/api/queries/get/locationQuery/location.type'
@@ -26,10 +25,11 @@ export async function getLocation(): Promise<Location> {
 
 export default async function Layout({ children }: { children: JSX.Element }) {
   const location = await getLocation()
-  const locale = await getLocale()
+  // Always use English locale
+  const locale = 'en'
 
   return (
-    <html translate="no" lang={locale || 'en'}>
+    <html translate="no" lang={locale}>
       <body>
         <ResponsizeSizeProvider>
           <Suspense>

@@ -105,7 +105,7 @@ export const FOOTER_LINKS: { [key in Section]: FooterLinkType[] } = {
       key: 'footer.giftcard',
     },
     {
-      path: '/blog',
+      path: '/blogs',
       key: 'footer.blog',
     },
     {

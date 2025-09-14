@@ -5,7 +5,6 @@ import useSWRMutation, {
   SWRMutationConfiguration,
   SWRMutationResponse,
 } from 'swr/mutation'
-import { useLocale } from 'next-intl'
 import { Key } from 'swr'
 import { SWRMutationOptions } from './fetcher/options'
 
@@ -15,7 +14,8 @@ export default function useSignedMutation<T, E = unknown>(
   query: QueryType,
   options?: SWRMutationConfiguration<T, E, Key, unknown, T>
 ): SWRMutationResponse<T, E, Key, unknown> {
-  const locale = useLocale()
+  // Always use English locale
+  const locale = 'en'
   const isDynamic = typeof query === 'function'
 
   return useSWRMutation<T, E, Key, unknown>(

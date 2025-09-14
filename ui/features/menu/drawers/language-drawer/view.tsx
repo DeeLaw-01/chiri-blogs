@@ -4,14 +4,13 @@ import locales from 'src/data/locales'
 import SelectItem from './select-item'
 import { Locale } from 'src/utils/languageUtils'
 import { usePathname, useRouter } from 'src/i18n/router'
-import { useLocale } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 
 type LanguageViewProps = {
   onClose: () => void
 }
 export default function LanguageView({ onClose }: LanguageViewProps) {
-  const locale = useLocale()
+  const locale = 'en'
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()

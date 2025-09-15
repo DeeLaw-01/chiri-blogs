@@ -135,6 +135,11 @@ export default function FooterDesktop({ phone }: FooterDesktopProps) {
           </Box>
         </Stack>
       </VStack>
+      <Box w="full" display="flex" justifyContent="center">
+        <Text mt={2} mb={4} fontSize="xs" textAlign={'center'} color={'_gray'}>
+          Copyright 2025 Chiri Private Limited. All rights reserved.
+        </Text>
+      </Box>
     </VStack>
   )
 }

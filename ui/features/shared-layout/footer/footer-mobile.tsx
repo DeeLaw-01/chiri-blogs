@@ -130,7 +130,7 @@ export default function FooterMobile({ phone }: { phone: string }) {
       </Box>
       <Box w="full" display="flex" justifyContent="center">
         <Text mt={2} mb={4} fontSize="xs" textAlign={'center'} color={'_gray'}>
-          Copyright 2025 Chiri.pk Private Limited. All rights reserved.
+          Copyright 2025 Chiri Private Limited. All rights reserved.
         </Text>
       </Box>
     </VStack>

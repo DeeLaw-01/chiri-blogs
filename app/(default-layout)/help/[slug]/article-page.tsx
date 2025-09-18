@@ -15,13 +15,13 @@ import { useRouter } from 'src/i18n/router'
 import { Article } from 'ui/features/help/help.type'
 import parse from 'ui/features/help/parse'
 import { getHeadersParse } from 'ui/features/help/parse/headers'
-import useChatBot from 'src/hooks/useChatBot'
+// import useChatBot from 'src/hooks/useChatBot'
 
 type HelpArticleProps = {
   article: Article
 }
 export default function HelpArticle({ article }: HelpArticleProps) {
-  const { showAndOpen } = useChatBot()
+  // const { showAndOpen } = useChatBot()
   const [feedback, setFeedback] = useState<string[]>([])
   const router = useRouter()
 
@@ -114,7 +114,7 @@ export default function HelpArticle({ article }: HelpArticleProps) {
             </Box>
           ))}
         </Stack>
-        <Stack
+        {/* <Stack
           w="full"
           display="flex"
           justifyContent={'flex-end'}
@@ -131,7 +131,7 @@ export default function HelpArticle({ article }: HelpArticleProps) {
           >
             <Text notag st="help-page.support.banner.button" />
           </Button>
-        </Stack>
+        </Stack> */}
       </Container>
     </>
   )

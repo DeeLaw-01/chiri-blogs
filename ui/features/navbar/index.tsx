@@ -4,7 +4,7 @@ import { Box, Flex, HStack, FlexProps, IconButton } from '@chakra-ui/react'
 
 import { useRouter } from 'app/router'
 import Container from 'ui/primitives/Container'
-import SupportNavButton from './support-nav-button'
+// import SupportNavButton from './support-nav-button'
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
 
 import { theme } from 'src/styles/theme'
@@ -167,7 +167,7 @@ function Navbar({
             <LogoIcon height="40" />
           </Box>
           <HStack mt={2} gap={2}>
-            {showSupport && <SupportNavButton isTransparent={isTransparent} />}
+            {/* {showSupport && <SupportNavButton isTransparent={isTransparent} />} */}
             {showMarketplaceCart && (
               <DynamicNavCheckoutButton isTransparent={isTransparent} />
             )}

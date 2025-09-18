@@ -16,7 +16,6 @@ import { useResponsiveSizes } from 'src/contexts/responsive'
 import { CONFIG_SETTINGS } from 'src/config'
 import { useTripDetailsAtoms } from '../useTripDetailsAtoms'
 import CityOverview from './city-overview'
-import CoinsCard from './coins-card'
 
 type TripOverviewProps = {
   trip: TripDetailsResponseType
@@ -110,7 +109,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
       </Box>
 
       {/* Discount */}
-      <Box mt={10} position="relative">
+      {/* <Box mt={10} position="relative">
         <Heading
           as="h1"
           mb="2"
@@ -118,7 +117,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
           st="new-trip-page.overview.discount.heading"
         />
         <CoinsCard />
-      </Box>
+      </Box> */}
 
       {/* Insurance */}
       {trip.protection_available && (

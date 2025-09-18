@@ -6,8 +6,8 @@ import Text from 'ui/primitives/Text'
 import Accordion from 'ui/primitives/Accordion'
 import { FAQData } from 'src/data/faqs'
 import Heading from 'ui/primitives/Heading'
-import Button from 'ui/primitives/Button'
-import useChatBot from 'src/hooks/useChatBot'
+// import Button from 'ui/primitives/Button'
+// import useChatBot from 'src/hooks/useChatBot'
 import { articles } from 'ui/features/help/help-data'
 import NextLink from 'next/link'
 import SearchBox from 'ui/features/help/article-search'
@@ -16,7 +16,7 @@ import JSONLD from 'ui/shared/json-ld'
 import GuideSection from 'ui/features/help/guides/section'
 
 export default function Help(): JSX.Element {
-  const { showAndOpen } = useChatBot()
+  // const { showAndOpen } = useChatBot()
   const { t } = useTranslation()
 
   const getStructuredData = (): object => {
@@ -108,7 +108,7 @@ export default function Help(): JSX.Element {
               />
               <Text color="_darkgray" st="help-page.support.banner.subtitle" />
             </Box>
-            <Button
+            {/* <Button
               primary
               w={{ base: 'full', md: 'initial' }}
               onClick={() => {
@@ -119,7 +119,7 @@ export default function Help(): JSX.Element {
               id="contact-support-button"
             >
               <Text notag st="help-page.support.banner.button" />
-            </Button>
+            </Button> */}
           </Stack>
           <Box mt="10">
             <Heading as="h2" st="faqs-data.header" />

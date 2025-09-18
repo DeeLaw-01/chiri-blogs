@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, createContext } from 'react'
 import useLocalStorage from 'src/hooks/useLocalStorage'
-import { Currency } from 'src/shared-types/currency'
+import { Currency, DEFAULT_CURRENCY } from 'src/shared-types/currency'
 import getCurrencyQuery from 'src/api/queries/get/currencyQuery'
 import { useFetch } from 'src/api/useFetch'
 import { CurrencyResponse } from 'src/api/queries/get/currencyQuery/currency.type'
@@ -17,12 +17,13 @@ export default function CurrencyProvider({ children }: CurrencyProviderProps) {
   useEffect(() => {
     if (!data || error) return
 
-    const current = selectedCurrency ?? data.user
+    // Use stored currency, fallback to PKR default, then API user currency
+    const current = selectedCurrency ?? DEFAULT_CURRENCY
     const code = data.rates[current.code]
 
-    setConversionFactor(code)
-    if (!selectedCurrency || !code) setSelectedCurrency(current)
-  }, [data, selectedCurrency])
+    setConversionFactor(code ?? 1)
+    if (!selectedCurrency) setSelectedCurrency(current)
+  }, [data, error, selectedCurrency, setSelectedCurrency])
 
   return (
     <CurrencyContext.Provider

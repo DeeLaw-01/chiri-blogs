@@ -1,6 +1,6 @@
 import { BoxProps, FormControl, FormLabel, VStack } from '@chakra-ui/react'
 import { FormProvider, useForm } from 'react-hook-form'
-import useChatBot from 'src/hooks/useChatBot'
+// import useChatBot from 'src/hooks/useChatBot'
 import { useRouter } from 'src/i18n/router'
 import Text from 'ui/primitives/Text'
 import BookingIdInput from '../inputs/booking-id'
@@ -16,7 +16,7 @@ type ManageBookingSignInForm = {
 
 export default function FindBookingForm({ ...rest }: FindBookingFormProps) {
   const router = useRouter()
-  const { showAndOpen } = useChatBot()
+  // const { showAndOpen } = useChatBot()
 
   const methods = useForm<ManageBookingSignInForm>({})
 
@@ -61,7 +61,7 @@ export default function FindBookingForm({ ...rest }: FindBookingFormProps) {
         >
           <Text st="common.hamburger.signin" />
         </Button>
-        <Button
+        {/* <Button
           id="manage-booking-forgot-details"
           fontWeight="normal"
           asLink
@@ -71,7 +71,7 @@ export default function FindBookingForm({ ...rest }: FindBookingFormProps) {
           onClick={() => showAndOpen && showAndOpen()}
         >
           <Text st="new-manage-booking-page.forgot.details.button.text" />
-        </Button>
+        </Button> */}
       </VStack>
     </FormProvider>
   )

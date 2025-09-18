@@ -2,16 +2,16 @@ import { Box, HStack } from '@chakra-ui/react'
 import Text from 'ui/primitives/Text'
 import ChatIcon from '@/icons/support-button/chat-bubble.svg'
 import { MotionBox } from 'ui/primitives/Motion'
-import useChatBot from 'src/hooks/useChatBot'
+// import useChatBot from 'src/hooks/useChatBot'
 import Card from 'ui/primitives/Card'
 import Button from 'ui/primitives/Button'
 
 export default function SupportCard() {
-  const { showAndOpen } = useChatBot()
+  // const { showAndOpen } = useChatBot()
   return (
     <Card
       p={5}
-      onClick={() => showAndOpen()}
+      onClick={() => {}}
       role="group"
       _hover={{
         cursor: 'pointer',

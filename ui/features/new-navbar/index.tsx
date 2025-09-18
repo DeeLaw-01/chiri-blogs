@@ -7,7 +7,7 @@ import Container from 'ui/primitives/Container'
 
 import { memo } from 'react'
 import Link from 'ui/primitives/Link'
-import SupportButton from './support-button'
+// import SupportButton from './support-button'
 import HamburgerButton from './hamburger-button'
 import isTransparent from './utils/isTransparent'
 import LoadingProgressBar from './loading-progress-bar'
@@ -41,18 +41,13 @@ function Navbar({ ...rest }: NavbarProps): JSX.Element {
       {...rest}
     >
       <LoadingProgressBar />
-      <Container display="flex" alignItems="center">
+      <Container display="flex" alignItems="center" className="border">
         <HStack justify="space-between" w="full">
           <HStack>
             <Link href="/">
-              <Box
-                transform={{
-                  base: transparent ? 'scale(0.5)' : 'scale(0.8)',
-                  md: 'scale(0.8)',
-                }}
-              >
+              <Box display="flex" alignItems="center">
                 {transparent ? (
-                  <LogoWhiteIcon height="80" />
+                  <LogoWhiteIcon height="50" />
                 ) : (
                   <LogoIcon height="40" />
                 )}
@@ -60,7 +55,7 @@ function Navbar({ ...rest }: NavbarProps): JSX.Element {
             </Link>
           </HStack>
           <HStack gap="1rem">
-            <SupportButton />
+            {/* <SupportButton /> */}
             <HamburgerButton />
           </HStack>
         </HStack>

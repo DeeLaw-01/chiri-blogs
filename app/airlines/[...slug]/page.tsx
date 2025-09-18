@@ -16,7 +16,7 @@ export default function AirlineBlogPage({ params }: Params) {
   const resizeTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
 
   // Construct the URL for the external blog post (direct path without /pages/ prefix)
-  const url = `https://chiri-booking-app.vercel.app/airline/${params.slug.join(
+  const url = `https://chiri-booking-app.vercel.app/airlines/${params.slug.join(
     '/'
   )}`
 

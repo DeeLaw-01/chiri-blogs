@@ -7,7 +7,7 @@ type Params = { params: { slug: string[] } }
 
 /**
  * Dynamic blog post page that displays individual blog posts in an iframe
- * Handles routes like /city-to-city/1755716035990-00snux
+ * Handles routes like /routes/1755716035990-00snux
  * Embedded from the external blog application at chiri-booking-app.vercel.app
  */
 export default function CityToCityBlogPage({ params }: Params) {
@@ -16,7 +16,7 @@ export default function CityToCityBlogPage({ params }: Params) {
   const resizeTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
 
   // Construct the URL for the external blog post (direct path without /pages/ prefix)
-  const url = `https://chiri-booking-app.vercel.app/city-to-city/${params.slug.join(
+  const url = `https://chiri-booking-app.vercel.app/routes/${params.slug.join(
     '/'
   )}`
 

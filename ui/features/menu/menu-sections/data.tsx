@@ -47,11 +47,11 @@ export const Default = [
     link: '/blogs',
     icon: NewspaperIcon,
   },
-  {
-    key: 'Dashboard',
-    link: 'https://dashboard.chiri.pk/login',
-    icon: FileLinesIcon,
-  },
+  // {
+  //   key: 'Dashboard',
+  //   link: 'https://dashboard.chiri.pk/login',
+  //   icon: FileLinesIcon,
+  // },
 ] as MenuItemType[]
 
 export const Help = [

@@ -19,10 +19,38 @@ export default function DateRangePicker(props: DateRangePickerProps) {
   }, [locale])
 
   const updateLocale = async (code: string): Promise<void> => {
-    if (code === 'en') setLang(enUS)
-    else {
-      const localeToSet = await import(`date-fns/locale/${code}/index.js`)
-      setLang(localeToSet?.default ?? enUS)
+    if (code === 'en') {
+      setLang(enUS)
+      return
+    }
+    
+    // For date-fns v3, we need to use specific locale paths
+    // Dynamic imports with variables don't work well in webpack
+    // So we'll just fallback to enUS for now
+    try {
+      // Map common locale codes to date-fns locale modules
+      const localeMap: Record<string, () => Promise<any>> = {
+        'ar': () => import('date-fns/locale/ar'),
+        'de': () => import('date-fns/locale/de'),
+        'es': () => import('date-fns/locale/es'),
+        'fr': () => import('date-fns/locale/fr'),
+        'it': () => import('date-fns/locale/it'),
+        'ja': () => import('date-fns/locale/ja'),
+        'ko': () => import('date-fns/locale/ko'),
+        'pt': () => import('date-fns/locale/pt'),
+        'ru': () => import('date-fns/locale/ru'),
+        'zh-CN': () => import('date-fns/locale/zh-CN'),
+      }
+      
+      if (localeMap[code]) {
+        const localeModule = await localeMap[code]()
+        setLang(localeModule.default ?? enUS)
+      } else {
+        setLang(enUS)
+      }
+    } catch (error) {
+      console.warn(`Failed to load locale ${code}, falling back to en-US`)
+      setLang(enUS)
     }
   }
 

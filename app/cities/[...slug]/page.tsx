@@ -1,103 +1,118 @@
-'use client'
+import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
+import { Suspense } from 'react'
+import { DynamicBlogViewer } from '@/ui/shadcn/blog/components'
+import Navbar from '@/ui/features/new-navbar'
+import Footer from '@/ui/features/shared-layout/footer'
 
-import { Box } from '@chakra-ui/react'
-import { useEffect, useState, useRef, useCallback } from 'react'
+const SITE_A_URL = process.env.NEXT_PUBLIC_SITE_A_URL || 'https://chiri.pk'
 
-type Params = { params: { slug: string[] } }
+interface BlogMetadata {
+  seoTitle?: string
+  description?: string
+  keywords?: string[]
+  ogTitle?: string
+  ogDescription?: string
+  canonicalUrl?: string
+  fromCity?: {
+    name: string
+    locode: string
+    country?: string
+  }
+  toCity?: {
+    name: string
+    locode: string
+    country?: string
+  }
+  [key: string]: any
+}
 
-/**
- * Dynamic blog post page that displays individual blog posts in an iframe
- * Handles routes like /cities/1755716035990-00snux
- * Embedded from the external blog application at chiri-booking-app.vercel.app
- */
-export default function CitiesBlogPage({ params }: Params) {
-  const [height, setHeight] = useState('100vh')
-  const lastHeightRef = useRef<number>(0)
-  const resizeTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
+interface Blog {
+  title: string
+  coverImage?: string
+  sections: any[]
+  breadcrumbs?: any[]
+  metadata?: BlogMetadata
+}
 
-  // Construct the URL for the external blog post (direct path without /pages/ prefix)
-  const url = `https://chiri-booking-app.vercel.app/cities/${params.slug.join(
-    '/'
-  )}`
+interface Props {
+  params: Promise<{ slug: string[] }>
+}
 
-  /**
-   * Debounced height update to prevent UI jumping during iframe resize
-   * Only updates if height difference is significant (more than 10px)
-   */
-  const updateHeight = useCallback((newHeight: number) => {
-    // Clear any existing timeout to prevent multiple updates
-    if (resizeTimeoutRef.current) {
-      clearTimeout(resizeTimeoutRef.current)
-    }
+async function getBlog(slug: string): Promise<Blog | null> {
+  const res = await fetch(`${SITE_A_URL}/api/blog-templates/slug/${slug}`, {
+    next: { revalidate: 1800 }
+  })
+  if (!res.ok) return null
+  return res.json()
+}
 
-    // Only update if height difference is significant to avoid unnecessary re-renders
-    const heightDifference = Math.abs(newHeight - lastHeightRef.current)
-    if (heightDifference < 10) return
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const blogSlug = slug[slug.length - 1]
+  const blog = await getBlog(blogSlug)
 
-    // Debounce the height update to smooth out rapid changes
-    resizeTimeoutRef.current = setTimeout(() => {
-      const heightWithBuffer = Math.max(newHeight + 50, 400) // Add buffer and minimum height
-      setHeight(`${heightWithBuffer}px`)
-      lastHeightRef.current = heightWithBuffer
-    }, 300) // Wait 300ms before applying height change
-  }, [])
+  if (!blog) {
+    return { title: 'City Not Found' }
+  }
 
-  useEffect(() => {
-    /**
-     * Handle messages from the iframe
-     * Supports navigation and dynamic height adjustment
-     */
-    const handleMessage = (event: MessageEvent) => {
-      // Security check: only accept messages from the trusted origin
-      if (event.origin !== 'https://chiri-booking-app.vercel.app') return
+  // Use SEO title if available, fallback to regular title
+  const pageTitle = blog.metadata?.seoTitle || blog.title
+  
+  // Generate canonical URL
+  const canonicalUrl = blog.metadata?.canonicalUrl || `https://chiri.pk/cities/${blogSlug}`
 
-      console.log('Received message:', event.data)
+  return {
+    title: pageTitle,
+    description: blog.metadata?.description || '',
+    keywords: blog.metadata?.keywords || [],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    openGraph: {
+      title: blog.metadata?.ogTitle || pageTitle,
+      description: blog.metadata?.ogDescription || blog.metadata?.description || '',
+      images: [blog.coverImage || ''],
+      url: canonicalUrl,
+      type: 'article',
+    },
+  }
+}
 
-      // Handle navigation back to blogs listing (no locale prefix)
-      if (event.data.type === 'chiri-blogs-button-click') {
-        window.location.href = '/blogs'
-      }
+export default async function CityPage({ params }: Props) {
+  const { slug } = await params
+  const blogSlug = slug[slug.length - 1]
+  const blog = await getBlog(blogSlug)
 
-      // Handle navigation to home page
-      if (event.data.type === 'chiri-home-button-click') {
-        window.location.href = '/'
-      }
-
-      // Handle dynamic iframe height updates
-      if (
-        event.data.type === 'resize' &&
-        typeof event.data.height === 'number'
-      ) {
-        updateHeight(event.data.height)
-      }
-
-      // Handle iframe loaded event
-      if (event.data.type === 'iframe-loaded') {
-        console.log('Iframe loaded successfully')
-      }
-    }
-
-    // Register message listener
-    window.addEventListener('message', handleMessage)
-
-    // Cleanup on component unmount
-    return () => {
-      window.removeEventListener('message', handleMessage)
-      if (resizeTimeoutRef.current) {
-        clearTimeout(resizeTimeoutRef.current)
-      }
-    }
-  }, [updateHeight])
+  if (!blog) notFound()
 
   return (
-    <Box
-      as="iframe"
-      w="100%"
-      h={height}
-      src={url}
-      style={{ border: 'none' }}
-      title={`Cities Blog Post: ${params.slug.join('/')}`}
-      loading="lazy"
-    />
+    <>
+      <Navbar />
+      <main className="min-h-screen">
+        <Suspense fallback={<div>Loading...</div>}>
+          <DynamicBlogViewer
+            sections={blog.sections}
+            title={blog.title}
+            coverImage={blog.coverImage}
+            renderFlightSearchFilter={true}
+            breadcrumbs={blog.breadcrumbs}
+            metadata={blog.metadata}
+          />
+        </Suspense>
+      </main>
+      <Footer />
+    </>
   )
 }

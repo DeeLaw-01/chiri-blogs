@@ -41,7 +41,7 @@ function Navbar({ ...rest }: NavbarProps): JSX.Element {
       {...rest}
     >
       <LoadingProgressBar />
-      <Container display="flex" alignItems="center" className="border">
+      <Container display="flex" alignItems="center" className="">
         <HStack justify="space-between" w="full">
           <HStack>
             <Link href="/">

@@ -20,6 +20,10 @@ const allowedExternalDomainsForImage = [
   'us.dotwconnect.com',
   'cf2.bstatic.com',
   'res.cloudinary.com',
+  'chiri.pk',
+  'chiri.pk',
+  'images.unsplash.com',
+  'cdn.pixabay.com',
 ]
 
 /**

@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://chiri.pk
+
+# Sitemaps
+Sitemap: https://chiri.pk/sitemap.xml
+Sitemap: https://chiri.pk/server-sitemap.xml

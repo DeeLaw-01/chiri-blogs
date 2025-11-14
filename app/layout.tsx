@@ -6,6 +6,9 @@ import { serverFetch } from 'src/api/serverFetch'
 import { cookies } from 'next/headers'
 import userLocationQuery from 'src/api/queries/get/userLocationQuery'
 import { Location } from 'src/api/queries/get/locationQuery/location.type'
+import { ExchangeRatesProvider } from '@/src/contexts/ExchangeRatesContext'
+// Import shadcn styles (isolated from Chakra UI)
+import '@/src/styles/shadcn.css'
 
 export const revalidate = 0
 
@@ -34,7 +37,9 @@ export default async function Layout({ children }: { children: JSX.Element }) {
         <ResponsizeSizeProvider>
           <Suspense>
             <IntlProvider page={'*'}>
-              <RootProvider location={location}>{children}</RootProvider>
+              <ExchangeRatesProvider>
+                <RootProvider location={location}>{children}</RootProvider>
+              </ExchangeRatesProvider>
             </IntlProvider>
           </Suspense>
         </ResponsizeSizeProvider>

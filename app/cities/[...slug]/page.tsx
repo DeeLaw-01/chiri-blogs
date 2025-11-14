@@ -5,7 +5,7 @@ import { DynamicBlogViewer } from '@/ui/shadcn/blog/components'
 import Navbar from '@/ui/features/new-navbar'
 import Footer from '@/ui/features/shared-layout/footer'
 
-const SITE_A_URL = process.env.NEXT_PUBLIC_SITE_A_URL || 'https://chiri.pk'
+const SITE_A_URL = process.env.NEXT_PUBLIC_SITE_A_URL || 'https://dashboard.chiri.pk'
 
 interface BlogMetadata {
   seoTitle?: string

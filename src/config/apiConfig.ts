@@ -4,11 +4,11 @@
  * Site B (chiri-blogs) fetches data from Site A (chiri-booking-app) APIs.
  * 
  * Environment Variables:
- * - NEXT_PUBLIC_SITE_A_URL: Base URL for Site A (defaults to https://chiri.pk)
+ * - NEXT_PUBLIC_SITE_A_URL: Base URL for Site A (defaults to https://dashboard.chiri.pk)
  */
 
 // Site A base URL - where the booking app APIs are hosted
-const SITE_A_BASE_URL = process.env.NEXT_PUBLIC_SITE_A_URL || 'https://chiri.pk'
+const SITE_A_BASE_URL = process.env.NEXT_PUBLIC_SITE_A_URL || 'https://dashboard.chiri.pk'
 
 // API Configuration Constants
 export const API_CONFIG = {

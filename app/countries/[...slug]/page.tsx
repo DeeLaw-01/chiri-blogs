@@ -4,7 +4,7 @@ import { DynamicBlogViewer } from '@/ui/shadcn/blog/components'
 import Navbar from '@/ui/features/new-navbar'
 import Footer from '@/ui/features/shared-layout/footer'
 
-const SITE_A_URL = process.env.NEXT_PUBLIC_SITE_A_URL || 'https://chiri.pk'
+const SITE_A_URL = process.env.NEXT_PUBLIC_SITE_A_URL || 'https://dashboard.chiri.pk'
 
 interface BlogMetadata {
   seoTitle?: string
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pageTitle = blog.metadata?.seoTitle || blog.title
   
   // Generate canonical URL - always self-referencing to current domain
-  const canonicalUrl = blog.metadata?.canonicalUrl || `https://chiri.pk/countries/${blogSlug}`
+  const canonicalUrl = blog.metadata?.canonicalUrl || `https://www.chiri.pk/countries/${blogSlug}`
 
   return {
     title: pageTitle,

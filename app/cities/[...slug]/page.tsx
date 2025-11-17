@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pageTitle = blog.metadata?.seoTitle || blog.title
   
   // Generate canonical URL - always self-referencing to current domain
-  const canonicalUrl = blog.metadata?.canonicalUrl || `https://chiri.pk/cities/${blogSlug}`
+  const canonicalUrl = blog.metadata?.canonicalUrl || `https://www.chiri.pk/cities/${blogSlug}`
 
   return {
     title: pageTitle,

@@ -49,7 +49,7 @@ export default function JSONLD({
       },
       contactPoint: {
         '@type': 'ContactPoint',
-        email: 'info@tryp.com',
+        email: 'info@chiri.pk',
         telephone: '+45 43326367',
         contactType: 'Customer service',
         availableLanguage: [

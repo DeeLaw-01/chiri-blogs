@@ -18,9 +18,9 @@ Disallow: /blog
 Allow: /en/blog
 
 # Host
-Host: https://www.tryp.com
+Host: https://chiri.pk
 
 # Sitemaps
-Sitemap: https://www.tryp.com/sitemap.xml
-Sitemap: https://www.tryp.com/sitemap-0.xml
-Sitemap: https://www.tryp.com/server-sitemap.xml
+Sitemap: https://chiri.pk/sitemap.xml
+Sitemap: https://chiri.pk/sitemap-0.xml
+Sitemap: https://chiri.pk/server-sitemap.xml

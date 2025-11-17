@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Use SEO title if available, fallback to regular title
   const pageTitle = blog.metadata?.seoTitle || blog.title
   
-  // Generate canonical URL
+  // Generate canonical URL - always self-referencing to current domain
   const canonicalUrl = blog.metadata?.canonicalUrl || `https://chiri.pk/countries/${blogSlug}`
 
   return {
@@ -86,8 +86,41 @@ export default async function CountryPage({ params }: Props) {
 
   if (!blog) notFound()
 
+  // Generate JSON-LD structured data for SEO
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: blog.title,
+    description: blog.metadata?.description || '',
+    image: blog.coverImage ? [blog.coverImage] : [],
+    datePublished: blog.metadata?.publishedDate || new Date().toISOString(),
+    dateModified: blog.metadata?.modifiedDate || new Date().toISOString(),
+    author: {
+      '@type': 'Organization',
+      name: 'Chiri',
+      url: 'https://chiri.pk'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Chiri',
+      url: 'https://chiri.pk',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://chiri.pk/logo.png'
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://chiri.pk/countries/${blogSlug}`
+    }
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Navbar />
       <main className="min-h-screen">
         <DynamicBlogViewer

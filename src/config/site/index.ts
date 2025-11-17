@@ -1,1 +1,1 @@
-export const BASE_LINK = 'https://chiri.pk'
+export const BASE_LINK = 'https://www.chiri.pk'

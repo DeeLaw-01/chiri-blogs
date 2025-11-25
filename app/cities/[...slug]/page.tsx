@@ -14,6 +14,7 @@ interface BlogMetadata {
   ogTitle?: string
   ogDescription?: string
   canonicalUrl?: string
+  noindex?: boolean
   fromCity?: {
     name: string
     locode: string
@@ -70,10 +71,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: canonicalUrl,
     },
     robots: {
-      index: true,
+      index: !blog.metadata?.noindex,
       follow: true,
       googleBot: {
-        index: true,
+        index: !blog.metadata?.noindex,
         follow: true,
         'max-video-preview': -1,
         'max-image-preview': 'large',

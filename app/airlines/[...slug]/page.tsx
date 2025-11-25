@@ -13,6 +13,7 @@ interface BlogMetadata {
   ogTitle?: string
   ogDescription?: string
   canonicalUrl?: string
+  noindex?: boolean
   [key: string]: any
 }
 
@@ -59,10 +60,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: canonicalUrl,
     },
     robots: {
-      index: true,
+      index: !blog.metadata?.noindex,
       follow: true,
       googleBot: {
-        index: true,
+        index: !blog.metadata?.noindex,
         follow: true,
         'max-video-preview': -1,
         'max-image-preview': 'large',

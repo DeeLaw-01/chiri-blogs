@@ -4,8 +4,15 @@ import { CONFIG_COMPANY, CONFIG_METADATA, CONFIG_SITE } from 'src/config'
 import locales from 'src/data/locales'
 import { replaceLocale } from 'src/utils/languageUtils'
 
-export async function getMetadata(locale: string): Promise<Metadata> {
-  const url = headers().get('x-request-url') ?? ''
+export async function getMetadata(_locale: string): Promise<Metadata> {
+  const requestUrl = headers().get('x-request-url') ?? ''
+  // Construct absolute URL for OpenGraph
+  const ogUrl = requestUrl 
+    ? (requestUrl.startsWith('http') ? requestUrl : new URL(requestUrl, CONFIG_SITE.BASE_LINK).toString())
+    : CONFIG_SITE.BASE_LINK
+  const canonicalUrl = requestUrl 
+    ? new URL(encodeURI(requestUrl), CONFIG_SITE.BASE_LINK)
+    : new URL(CONFIG_SITE.BASE_LINK)
 
   return {
     title: {
@@ -21,25 +28,30 @@ export async function getMetadata(locale: string): Promise<Metadata> {
       'facebook-domain-verification': 'xaw5wuy8snxjwye82r2v3knjqqvb19',
     },
     alternates: {
-      canonical: new URL(encodeURI(url), CONFIG_SITE.BASE_LINK),
+      canonical: canonicalUrl,
       languages: {
-        'x-default': replaceLocale(url, 'en'),
+        'x-default': replaceLocale(requestUrl, 'en'),
         ...Object.fromEntries(
-          locales.map(({ value }) => [value, replaceLocale(url, value)])
+          locales.map(({ value }) => [value, replaceLocale(requestUrl, value)])
         ),
       },
     },
     openGraph: {
-      url,
+      url: ogUrl,
       type: 'website',
       siteName: CONFIG_COMPANY.COMPANY_NAME,
-      title: 'Travel deals in 3 seconds',
+      title: `${CONFIG_COMPANY.COMPANY_NAME} | Travel deals in 3 seconds`,
       description: 'Find the best travel deals with artificial intelligence. Our algorithm connects flights, trains, and buses for perfect trips with matching hotels.',
-      images: [{ url: CONFIG_METADATA.IMG, width: 1200, height: 630 }],
+      images: [{ 
+        url: CONFIG_METADATA.IMG, 
+        width: 1200, 
+        height: 630,
+        alt: 'Chiri.pk - Travel deals in 3 seconds'
+      }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Travel deals in 3 seconds',
+      title: `${CONFIG_COMPANY.COMPANY_NAME} | Travel deals in 3 seconds`,
       description: 'Find the best travel deals with artificial intelligence. Our algorithm connects flights, trains, and buses for perfect trips with matching hotels.',
       images: [CONFIG_METADATA.IMG],
     },

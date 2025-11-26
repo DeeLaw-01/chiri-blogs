@@ -7,10 +7,17 @@ import { cookies } from 'next/headers'
 import userLocationQuery from 'src/api/queries/get/userLocationQuery'
 import { Location } from 'src/api/queries/get/locationQuery/location.type'
 import { ExchangeRatesProvider } from '@/src/contexts/ExchangeRatesContext'
+import { Metadata } from 'next'
 // Import shadcn styles (isolated from Chakra UI)
 import '@/src/styles/shadcn.css'
 
 export const revalidate = 0
+
+export async function generateMetadata(): Promise<Metadata> {
+  // Use English locale by default for metadata
+  const { getMetadata } = await import('./metadata')
+  return await getMetadata('en')
+}
 
 export async function getLocation(): Promise<Location> {
   const cookieStore = cookies()

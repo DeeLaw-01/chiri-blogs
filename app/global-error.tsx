@@ -1,19 +1,21 @@
 'use client'
 
-import {
-  Box,
-  ChakraProvider,
-  Stack,
-  Text,
-  VStack,
-  HStack,
-} from '@chakra-ui/react'
 import { useEffect } from 'react'
+import dynamic from 'next/dynamic'
 
-import Container from 'ui/primitives/Container'
-import Button from 'ui/primitives/Button'
+// Lazy load everything for error page since it's rarely seen
+const ChakraProvider = dynamic(() => import('@chakra-ui/react').then(mod => mod.ChakraProvider))
+const Box = dynamic(() => import('@chakra-ui/react').then(mod => mod.Box))
+const Stack = dynamic(() => import('@chakra-ui/react').then(mod => mod.Stack))
+const Text = dynamic(() => import('@chakra-ui/react').then(mod => mod.Text))
+const VStack = dynamic(() => import('@chakra-ui/react').then(mod => mod.VStack))
+const HStack = dynamic(() => import('@chakra-ui/react').then(mod => mod.HStack))
+
+const Container = dynamic(() => import('ui/primitives/Container'))
+const Button = dynamic(() => import('ui/primitives/Button'))
+const Logger = dynamic(() => import('ui/shared/logger'))
+
 import theme from 'src/styles/theme'
-import Logger from 'ui/shared/logger'
 import { CONFIG_SITE } from 'src/config'
 
 import LogoIcon from '@/icons/logo.svg'

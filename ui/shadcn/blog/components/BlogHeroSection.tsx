@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { DynamicBlogFlightFilter } from '@/ui/shadcn/blog/components/DynamicBlogViewer'
+import DynamicBlogFlightFilter from './DynamicBlogFlightFilter'
 import { cn } from '@/src/utils/shadcn/cn'
 import type { LocationResult } from '@/ui/shadcn/blog/types'
 
@@ -62,6 +62,13 @@ const BlogHeroSection: React.FC<BlogHeroSectionProps> = ({
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const getOptimizedImageUrl = (url: string) => {
+    if (!url || !url.includes('res.cloudinary.com')) return url
+    // Insert optimization parameters before /v[0-9]/ or /upload/ if version is missing
+    // Standard format: .../upload/v123456/... -> .../upload/f_auto,q_auto,w_1200/v123456/...
+    return url.replace(/\/upload\//, '/upload/f_auto,q_auto,w_1200/')
+  }
+
   return (
     <>
       {/* Hero Section */}
@@ -75,11 +82,12 @@ const BlogHeroSection: React.FC<BlogHeroSectionProps> = ({
         {coverImage && (
           <div className="absolute inset-0 z-0">
             <Image
-              src={coverImage}
+              src={getOptimizedImageUrl(coverImage)}
               alt={title}
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, 100vw"
               unoptimized
             />
             {/* Overlay */}
@@ -150,11 +158,13 @@ const BlogHeroSection: React.FC<BlogHeroSectionProps> = ({
             : "transform -translate-y-full opacity-0 pointer-events-none"
         )}
       >
-        <DynamicBlogFlightFilter 
-          widthMode="full" 
-          initialOrigin={initialOrigin}
-          initialDestinations={initialDestinations}
-        />
+        {isScrolled && (
+          <DynamicBlogFlightFilter 
+            widthMode="full" 
+            initialOrigin={initialOrigin}
+            initialDestinations={initialDestinations}
+          />
+        )}
       </div>
     </>
   )

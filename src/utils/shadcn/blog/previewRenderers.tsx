@@ -251,8 +251,54 @@ export const renderPreviewSection = (section: Section) => {
         <div className='max-w-3xl mx-auto'>
           <div
             className='prose max-w-none dark:prose-invert'
+            style={{
+              // Ensure lists are properly styled
+              '--tw-prose-bullets': '#374151',
+              '--tw-prose-counters': '#374151'
+            } as React.CSSProperties}
             dangerouslySetInnerHTML={{ __html: section.content || '' }}
           />
+          <style jsx>{`
+            div :global(ul) {
+              padding-left: 1.625em;
+              list-style-type: disc;
+            }
+            div :global(ol) {
+              padding-left: 1.625em;
+              list-style-type: decimal;
+            }
+            div :global(li) {
+              padding-left: 0.375em;
+              list-style-position: outside;
+            }
+            /* Force correct list types based on data-list attribute */
+            div :global(li[data-list="bullet"]) {
+              list-style-type: disc !important;
+            }
+            div :global(li[data-list="ordered"]) {
+              list-style-type: decimal !important;
+            }
+            /* Ensure ul shows bullets, ol shows numbers */
+            div :global(ul li),
+            div :global(ul li[data-list="bullet"]) {
+              list-style-type: disc !important;
+            }
+            div :global(ol li),
+            div :global(ol li[data-list="ordered"]) {
+              list-style-type: decimal !important;
+            }
+            /* Remove Quill's custom ::before elements */
+            div :global(li::before) {
+              display: none !important;
+              content: none !important;
+            }
+            div :global(li.ql-indent-1) {
+              padding-left: 3em;
+            }
+            div :global(li.ql-indent-2) {
+              padding-left: 4.5em;
+            }
+          `}</style>
         </div>
       )
 

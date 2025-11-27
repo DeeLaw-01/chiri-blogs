@@ -91,6 +91,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+import { generateSchema } from '@/src/utils/seo/schema-generator'
+
 export default async function CityPage({ params }: Props) {
   const { slug } = await params
   const blogSlug = slug[slug.length - 1]
@@ -99,36 +101,17 @@ export default async function CityPage({ params }: Props) {
   if (!blog) notFound()
 
   // Generate JSON-LD structured data for SEO
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: blog.title,
-    description: blog.metadata?.description || '',
-    image: blog.coverImage ? [blog.coverImage] : [],
-    datePublished: blog.metadata?.publishedDate || new Date().toISOString(),
-    dateModified: blog.metadata?.modifiedDate || new Date().toISOString(),
-    author: {
-      '@type': 'Organization',
-      name: 'Chiri',
-      url: 'https://chiri.pk'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Chiri',
-      url: 'https://chiri.pk',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://chiri.pk/logo.png'
-      }
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://chiri.pk/cities/${blogSlug}`
-    }
-  }
+  const structuredData = generateSchema(blog, `https://chiri.pk/cities/${blogSlug}`)
 
   return (
     <>
+      {blog.coverImage && (
+        <link
+          rel="preload"
+          as="image"
+          href={blog.coverImage.replace('/upload/', '/upload/f_auto,q_auto,w_1200/')}
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

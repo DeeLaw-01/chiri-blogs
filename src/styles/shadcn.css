@@ -82,6 +82,49 @@
   }
 }
 
+/* List styles for rendered Quill content - Use native browser rendering */
+.prose ul {
+  padding-left: 1.625em;
+  list-style-type: disc;
+}
+
+.prose ol {
+  padding-left: 1.625em;
+  list-style-type: decimal;
+}
+
+.prose li {
+  padding-left: 0.375em;
+  list-style-position: outside;
+}
+
+/* Override Quill's data-list attributes to force correct list types */
+.prose li[data-list="bullet"] {
+  list-style-type: disc !important;
+}
+
+.prose li[data-list="ordered"] {
+  list-style-type: decimal !important;
+}
+
+/* Ensure ul with bullet items shows discs */
+.prose ul li,
+.prose ul li[data-list="bullet"] {
+  list-style-type: disc !important;
+}
+
+/* Ensure ol with ordered items shows numbers */
+.prose ol li,
+.prose ol li[data-list="ordered"] {
+  list-style-type: decimal !important;
+}
+
+/* CRITICAL: Remove Quill's custom ::before counters */
+.prose li::before {
+  display: none !important;
+  content: none !important;
+}
+
 /*
  * Utility layer additions for shadcn
  */

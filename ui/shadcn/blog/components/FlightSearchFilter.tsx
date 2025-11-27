@@ -146,7 +146,7 @@ const LocationSearchInput: React.FC<{
                           "text-xs px-2 py-0.5 rounded-full",
                           styleVariant === 'hero' ? "bg-transparent text-gray-800 border-0" : "bg-primary/10 text-primary border border-primary/20"
                         )}>
-                          {loc.name.split(' ')[0]}
+                          {loc.name ? loc.name.split(' ')[0] : loc.locode}
                         </span>
                       ))}
                       {selectedLocations.length > 2 && (
@@ -170,6 +170,7 @@ const LocationSearchInput: React.FC<{
             onOpenAutoFocus={(e) => e.preventDefault()}
             onCloseAutoFocus={(e) => e.preventDefault()}
           >
+            {isOpen && (
             <div
               className="p-3"
               onClick={(e) => e.stopPropagation()}
@@ -268,6 +269,7 @@ const LocationSearchInput: React.FC<{
                 )}
               </div>
             </div>
+            )}
           </PopoverContent>
         </Popover>
       </div>
@@ -444,6 +446,8 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
             </button>
           </SheetTrigger>
           <SheetContent side="bottom" className="h-[88vh] p-4 overflow-y-auto">
+            {mobileSheetOpen && (
+              <>
             <SheetHeader>
               <SheetTitle className="text-left">Search</SheetTitle>
             </SheetHeader>
@@ -585,6 +589,8 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                 </Button>
               </div>
             </div>
+              </>
+            )}
           </SheetContent>
         </Sheet>
       </div>
@@ -612,7 +618,7 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                 <div className="flex flex-col text-gray-800 group-hover:text-primary text-left">
                   <div className="text-sm text-black leading-4">Where to?</div>
                   <div className="text-sm leading-5 text-left">
-                    {filters.origin ? filters.origin.name : 'Select origin'} - {filters.destinations.length > 0 ? `${filters.destinations[0].name.split(' ')[0]}${filters.destinations.length > 1 ? ` +${filters.destinations.length - 1}` : ''}` : 'Anywhere'}
+                    {filters.origin ? filters.origin.name : 'Select origin'} - {filters.destinations.length > 0 && filters.destinations[0]?.name ? `${filters.destinations[0].name.split(' ')[0]}${filters.destinations.length > 1 ? ` +${filters.destinations.length - 1}` : ''}` : 'Anywhere'}
                   </div>
                 </div>
               </button>
@@ -914,6 +920,7 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                 </button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
+                {showDateRangePopover && (
                 <Calendar
                   initialFocus
                   mode="range"
@@ -923,6 +930,7 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                   numberOfMonths={2}
                   disabled={(date) => date < new Date()}
                 />
+                )}
               </PopoverContent>
             </Popover>
           </div>
@@ -952,6 +960,7 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                 </button>
               </PopoverTrigger>
               <PopoverContent className="w-80" align="start">
+                {showPassengerPopover && (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -1034,6 +1043,7 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                     </div>
                   </div>
                 </div>
+                )}
               </PopoverContent>
             </Popover>
           </div>
@@ -1061,6 +1071,7 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                 </button>
               </PopoverTrigger>
               <PopoverContent className="w-[320px]" align="start">
+                {showFiltersPopover && (
                 <div className="space-y-4">
                   {/* Max stops */}
                   <div>
@@ -1121,6 +1132,7 @@ const FlightSearchFilter: React.FC<FlightSearchFilterProps> = ({
                     </div>
                   </div>
                 </div>
+                )}
               </PopoverContent>
             </Popover>
           </div>

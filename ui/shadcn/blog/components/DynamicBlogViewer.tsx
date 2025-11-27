@@ -1,21 +1,37 @@
 'use client'
 
 import React, { useMemo, useState, useCallback, useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import { Section, StopsAnalysisSection as StopsAnalysisSectionType } from '@/ui/shadcn/blog/types'
 import { renderPreviewSection } from '@/src/utils/shadcn/blog/previewRenderers'
-import {
-  AirlineFlights,
-  CheapestAirline,
-  RoundTripEstimate,
-  StopsAnalysisSection,
-  PackageSearchSection,
-  FlightSearchFilter,
-  FlightSkeleton,
-  PackageSkeleton,
-  BlogHeroSection
-} from '@/ui/shadcn/blog/components/'
+import FlightSearchFilter from './FlightSearchFilter'
+import FlightSkeleton from './FlightSkeleton'
+import PackageSkeleton from './PackageSkeleton'
+import BlogHeroSection from './BlogHeroSection'
 import { DateRange } from 'react-day-picker'
 import { LocationResult } from '@/ui/shadcn/blog/types'
+
+// Dynamically import heavy components with ssr: false for better initial load
+const AirlineFlights = dynamic(() => import('@/ui/shadcn/blog/components/').then(mod => mod.AirlineFlights), {
+  loading: () => <FlightSkeleton count={4} />,
+  ssr: false
+})
+const CheapestAirline = dynamic(() => import('@/ui/shadcn/blog/components/').then(mod => mod.CheapestAirline), {
+  loading: () => <div className="animate-pulse h-48 bg-gray-100 rounded" />,
+  ssr: false
+})
+const RoundTripEstimate = dynamic(() => import('@/ui/shadcn/blog/components/').then(mod => mod.RoundTripEstimate), {
+  loading: () => <div className="animate-pulse h-32 bg-gray-100 rounded" />,
+  ssr: false
+})
+const StopsAnalysisSection = dynamic(() => import('@/ui/shadcn/blog/components/').then(mod => mod.StopsAnalysisSection), {
+  loading: () => <FlightSkeleton count={4} />,
+  ssr: false
+})
+const PackageSearchSection = dynamic(() => import('@/ui/shadcn/blog/components/').then(mod => mod.PackageSearchSection), {
+  loading: () => <PackageSkeleton count={3} />,
+  ssr: false
+})
 
 interface FlightFilters {
   dateRange: DateRange | undefined
@@ -630,20 +646,6 @@ const ShareIcon: React.FC<{ className?: string }> = ({ className }) => (
 )
 
 // Separate component for FlightSearchFilter that can be used outside containers
-export const DynamicBlogFlightFilter: React.FC<{
-  onFilterChange?: (filters: FlightFilters) => void
-  widthMode?: 'fit' | 'full'
-  initialOrigin?: LocationResult | null
-  initialDestinations?: LocationResult[]
-}> = ({ onFilterChange, widthMode = 'fit', initialOrigin, initialDestinations }) => {
-  return (
-    <FlightSearchFilter
-      onFilterChange={onFilterChange}
-      widthMode={widthMode}
-      initialOrigin={initialOrigin}
-      initialDestinations={initialDestinations}
-    />
-  )
-}
+export { default as DynamicBlogFlightFilter } from './DynamicBlogFlightFilter'
 
 export default DynamicBlogViewer 

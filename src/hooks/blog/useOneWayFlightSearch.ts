@@ -104,7 +104,6 @@ export const useOneWayFlightSearch = (): UseOneWayFlightSearchReturn => {
         ...(airlineCarriers.length > 0 && { include_airlines: airlineCarriers.join(',') })
       })
 
-      console.log('Searching one-way flights with params:', Object.fromEntries(queryParams))
 
       const response = await fetch(`${API_BASE_URL}/one-way-flights?${queryParams}`, {
         method: 'GET',
@@ -134,7 +133,6 @@ export const useOneWayFlightSearch = (): UseOneWayFlightSearchReturn => {
         throw new Error('Invalid response format: expected an array')
       }
 
-      console.log(`Successfully fetched ${data.length} one-way trips:`, data)
       setTrips(data)
 
     } catch (err) {

@@ -20,7 +20,6 @@ export async function GET(request: NextRequest) {
     // Forward the request to Site A with all query params
     const siteAUrl = `${SITE_A_BASE_URL}/api/blogs?${searchParams.toString()}`
     
-    console.log('[Proxy] Forwarding blogs GET request to:', siteAUrl)
     
     const response = await fetch(siteAUrl, {
       method: 'GET',
@@ -88,8 +87,6 @@ async function forwardMutationRequest(request: NextRequest, method: string) {
     const body = method !== 'DELETE' ? await request.json() : undefined
     
     const siteAUrl = `${SITE_A_BASE_URL}/api/blogs?${searchParams.toString()}`
-    
-    console.log(`[Proxy] Forwarding blogs ${method} request to:`, siteAUrl)
     
     // Forward cookies for authentication
     const cookie = request.headers.get('cookie')

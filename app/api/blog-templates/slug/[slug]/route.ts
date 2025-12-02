@@ -22,8 +22,6 @@ export async function GET(
     // Forward the request to Site A
     const siteAUrl = `${SITE_A_BASE_URL}/api/blog-templates/slug/${slug}`
     
-    console.log('[Proxy] Forwarding blog-templates slug request to:', siteAUrl)
-    
     const response = await fetch(siteAUrl, {
       method: 'GET',
       headers: {

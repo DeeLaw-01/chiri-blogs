@@ -23,7 +23,6 @@ export async function GET(request: NextRequest) {
     // Forward the request to Site A with all query params
     const siteAUrl = `${SITE_A_BASE_URL}/api/carriers?${searchParams.toString()}`
     
-    console.log('[Proxy] Forwarding carriers request to:', siteAUrl)
     
     const response = await fetch(siteAUrl, {
       method: 'GET',

@@ -171,7 +171,6 @@ export const useLazyComponentLoader = (
       hasTriggeredRef.current = true
       setShouldLoad(true)
       
-      console.log(`👁️ LazyLoader: ${componentType} became visible (priority: ${priority})`)
     }
   }, [isVisible, componentType, priority])
 

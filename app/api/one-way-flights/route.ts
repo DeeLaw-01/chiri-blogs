@@ -20,8 +20,6 @@ export async function GET(request: NextRequest) {
     // Forward the request to Site A with all query params
     const siteAUrl = `${SITE_A_BASE_URL}/api/one-way-flights?${searchParams.toString()}`
     
-    console.log('[Proxy] Forwarding one-way flights request to:', siteAUrl)
-    
     const response = await fetch(siteAUrl, {
       method: 'GET',
       headers: {

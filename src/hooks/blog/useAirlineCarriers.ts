@@ -55,7 +55,6 @@ export const useAirlineCarriers = (): UseAirlineCarriersReturn => {
         destination: destination
       })
 
-      console.log('Fetching carriers for route:', origin, '→', destination)
 
       const data = await globalAPICache.cached(
         'carriers',
@@ -112,7 +111,6 @@ export const useAirlineCarriers = (): UseAirlineCarriersReturn => {
         console.warn('Some carriers had invalid structure and were filtered out')
       }
 
-      console.log(`Successfully fetched ${validCarriers.length} airline carriers`)
       setCarriers(validCarriers)
 
     } catch (err) {

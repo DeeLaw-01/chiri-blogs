@@ -123,7 +123,6 @@ export default async function RoutePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Navbar />
       <main className="min-h-screen">
         <Suspense fallback={<div>Loading...</div>}>
           <DynamicBlogViewer

@@ -115,7 +115,6 @@ export default async function CountryPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Navbar />
       <main className="min-h-screen">
         <DynamicBlogViewer
           sections={blog.sections}
